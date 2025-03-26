@@ -1,0 +1,18 @@
+{{ $trimmed := trim .Inner "\n" }}
+{{ $lines := split $trimmed "\n" }}
+<div class="checklist">
+{{ range $i, $line := $lines }}
+  {{ $line := trim $line " " }}
+  {{ if $line }}
+    {{ $checked := false }}
+    {{ if findRE `\[[xX]\]` $line }}
+      {{ $checked = true }}
+    {{ end }}
+    {{ $itemText := replaceRE `-\s+\[[ xX]\]\s+` "" $line }}
+    <div class="checklist-item">
+      <input type="checkbox" id="item-{{ $i }}" data-index="{{ $i }}" {{ if $checked }}checked{{ end }}>
+      <label for="item-{{ $i }}">{{ $itemText }}</label>
+    </div>
+  {{ end }}
+{{ end }}
+</div>

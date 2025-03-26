@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  {{- partial "head.html" . -}}
+  <body>
+    <div id="baseContainer">
+      {{- partial "header.html" -}}
+
+      <div id="contentContainer">
+        <div id="content">
+          <main>
+            {{- block "main" . }}{{- end }}
+          </main>
+          {{- partial "footer.html" -}}
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>

@@ -1,0 +1,22 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 1rem;
+  background: #f9f9f9;
+}
+
+article {
+  max-width: 800px;
+  margin: auto;
+}
+
+.checklist {
+  margin: 1rem 0;
+}
+
+.checklist-item {
+  margin: 0.5rem 0;
+}
+
+.checklist-item input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
