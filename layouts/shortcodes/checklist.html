@@ -1,18 +1,95 @@
 {{ $trimmed := trim .Inner "\n" }}
 {{ $lines := split $trimmed "\n" }}
-<div class="checklist">
-{{ range $i, $line := $lines }}
-  {{ $line := trim $line " " }}
-  {{ if $line }}
-    {{ $checked := false }}
-    {{ if findRE `\[[xX]\]` $line }}
-      {{ $checked = true }}
+<ul class="checklist">
+  {{/* Initialize state variables */}}
+  {{ $currentHeader := "default" }}
+  {{ $openList := false }}
+  {{ $itemCounter := 0 }}
+  {{ $openSubList := false }}
+  {{ $currentSubHeader := "" }}
+  {{ $subItemCounter := 0 }}
+
+  {{ range $index, $line := $lines }}
+    {{ $line = trim $line " " }}
+    {{ if gt (len $line) 0 }}
+      {{/* Handle sub-checklist header: lines starting with "###" */}}
+      {{ if hasPrefix $line "###" }}
+        {{ if $openSubList }}
+          </ul>
+          {{ $openSubList = false }}
+        {{ end }}
+        {{ $subHeaderText := trim (replace $line "###" "") " " }}
+        {{ $subHeaderID := urlize $subHeaderText }}
+        <li class="sub-checklist-header" id="{{ $currentHeader }}-{{ $subHeaderID }}-header">
+          <h4>
+            {{ $subHeaderText }}
+            <button class="collapse-button" onclick="toggleCollapse('{{ $currentHeader }}-{{ $subHeaderID }}')">Toggle</button>
+          </h4>
+        </li>
+        <ul class="sub-checklist-section" id="{{ $currentHeader }}-{{ $subHeaderID }}-list">
+          {{ $openSubList = true }}
+          {{ $currentSubHeader = $subHeaderID }}
+          {{ $subItemCounter = 0 }}
+      
+      {{ else if hasPrefix $line "##" }}
+        {{/* Handle main checklist header: lines starting with "##" */}}
+        {{ if $openSubList }}
+          </ul>
+          {{ $openSubList = false }}
+        {{ end }}
+        {{ if $openList }}
+          </ul>
+          {{ $openList = false }}
+        {{ end }}
+        {{ $headerText := trim (replace $line "##" "") " " }}
+        {{ $headerID := urlize $headerText }}
+        <li class="checklist-header" id="{{ $headerID }}-header">
+          <h3>
+            {{ $headerText }}
+            <button class="collapse-button" onclick="toggleCollapse('{{ $headerID }}')">Toggle</button>
+          </h3>
+        </li>
+        <ul class="checklist-section" id="{{ $headerID }}-list">
+          {{ $openList = true }}
+          {{ $currentHeader = $headerID }}
+          {{ $itemCounter = 0 }}
+      
+      {{ else }}
+        {{/* For a regular checklist item: first remove any leading "- " */}}
+        {{ $cleanLine := replaceRE "^-\\s+" "" $line }}
+        {{ if $openSubList }}
+          {{ $subItemCounter = add $subItemCounter 1 }}
+          <li class="checklist-item" id="{{ $currentHeader }}-{{ $currentSubHeader }}-item-{{ $subItemCounter }}">
+            <input type="checkbox" id="{{ $currentHeader }}-{{ $currentSubHeader }}-checkbox-{{ $subItemCounter }}">
+            <label for="{{ $currentHeader }}-{{ $currentSubHeader }}-checkbox-{{ $subItemCounter }}">{{ $cleanLine }}</label>
+          </li>
+        {{ else if $openList }}
+          {{ $itemCounter = add $itemCounter 1 }}
+          <li class="checklist-item" id="{{ $currentHeader }}-item-{{ $itemCounter }}">
+            <input type="checkbox" id="{{ $currentHeader }}-checkbox-{{ $itemCounter }}">
+            <label for="{{ $currentHeader }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
+          </li>
+        {{ else }}
+          {{/* If no list is open yet, open a default section */}}
+          <ul class="checklist-section" id="default-list">
+            {{ $openList = true }}
+            {{ $currentHeader = "default" }}
+            {{ $itemCounter = 0 }}
+          </ul>
+          {{ $itemCounter = add $itemCounter 1 }}
+          <li class="checklist-item" id="{{ $currentHeader }}-item-{{ $itemCounter }}">
+            <input type="checkbox" id="{{ $currentHeader }}-checkbox-{{ $itemCounter }}">
+            <label for="{{ $currentHeader }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
+          </li>
+        {{ end }}
+      {{ end }}
     {{ end }}
-    {{ $itemText := replaceRE `-\s+\[[ xX]\]\s+` "" $line }}
-    <div class="checklist-item">
-      <input type="checkbox" id="item-{{ $i }}" data-index="{{ $i }}" {{ if $checked }}checked{{ end }}>
-      <label for="item-{{ $i }}">{{ $itemText }}</label>
-    </div>
   {{ end }}
-{{ end }}
-</div>
+
+  {{ if $openSubList }}
+    </ul>
+  {{ end }}
+  {{ if $openList }}
+    </ul>
+  {{ end }}
+</ul>

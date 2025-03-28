@@ -1,0 +1,26 @@
+<header class="game-header">
+  <h1>
+    {{/* If we’re on a page within a game, show the parent’s title; otherwise, use the current title */}}
+    {{ if .IsPage }}
+      {{ with .Parent }}{{ .Title }}{{ else }}{{ .Title }}{{ end }}
+    {{ else if .IsSection }}
+      {{ .Title }}
+    {{ end }}
+  </h1>
+  <nav class="game-nav">
+    <ul>
+      {{/* If we're on a page, get the parent’s pages; if we’re on a section, get its pages */}}
+      {{ if .IsPage }}
+        {{ with .Parent }}
+          {{ range .Pages }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          {{ end }}
+        {{ end }}
+      {{ else if .IsSection }}
+        {{ range .Pages }}
+          <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      {{ end }}
+    </ul>
+  </nav>
+</header>
