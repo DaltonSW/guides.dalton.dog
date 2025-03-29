@@ -1,11 +1,12 @@
 baseURL: https://guides.dalton.dog/
 languageCode: en-us
 title: Dalton's Game Guides
-copyright: 2025
+copyright: "Dalton Williams 2025"
 
 caches:
   images:
     dir: :cacheDir/images
 
 params:
+  author: Dalton Williams
   subtitle: Checklists and Tables and Such

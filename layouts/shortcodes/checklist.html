@@ -23,10 +23,11 @@
         <li class="sub-checklist-header" id="{{ $currentHeader }}-{{ $subHeaderID }}-header">
           <h4>
             {{ $subHeaderText }}
-            <button class="collapse-button" onclick="toggleCollapse('{{ $currentHeader }}-{{ $subHeaderID }}')">Toggle</button>
+            <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $currentHeader }}-{{ $subHeaderID }}-list" aria-expanded="false" aria-controls="{{ $currentHeader }}-{{ $subHeaderID }}-list">Toggle
+            </button>
           </h4>
         </li>
-        <ul class="sub-checklist-section" id="{{ $currentHeader }}-{{ $subHeaderID }}-list">
+        <ul class="sub-checklist-section collapse" id="{{ $currentHeader }}-{{ $subHeaderID }}-list">
           {{ $openSubList = true }}
           {{ $currentSubHeader = $subHeaderID }}
           {{ $subItemCounter = 0 }}
@@ -46,10 +47,11 @@
         <li class="checklist-header" id="{{ $headerID }}-header">
           <h3>
             {{ $headerText }}
-            <button class="collapse-button" onclick="toggleCollapse('{{ $headerID }}')">Toggle</button>
+            <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $headerID }}-list" aria-expanded="false" aria-controls="{{ $headerID }}-list">Toggle
+            </button>
           </h3>
         </li>
-        <ul class="checklist-section" id="{{ $headerID }}-list">
+        <ul class="checklist-section collapse" id="{{ $headerID }}-list">
           {{ $openList = true }}
           {{ $currentHeader = $headerID }}
           {{ $itemCounter = 0 }}
@@ -71,7 +73,7 @@
           </li>
         {{ else }}
           {{/* If no list is open yet, open a default section */}}
-          <ul class="checklist-section" id="default-list">
+          <ul class="checklist-section collapse" id="default-list">
             {{ $openList = true }}
             {{ $currentHeader = "default" }}
             {{ $itemCounter = 0 }}

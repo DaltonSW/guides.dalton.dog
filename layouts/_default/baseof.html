@@ -3,17 +3,17 @@
   {{- partial "head.html" . -}}
   <body>
     <div id="baseContainer">
-      {{- partial "menu.html" (dict "menuID" "main" "page" . "title" .Site.Title ) }}
+      {{- partial "menu.html" (dict "menuID" "main" "page" . "title" .Site.Title ) . }}
       <div id="contentContainer">
         <div id="content" class="container">
           <main class="d-flex justify-content-center">
             {{- block "main" . }}{{- end }}
           </main>
-          {{- partial "footer.html" -}}
+          {{- partial "footer.html" . -}}
         </div>
       </div>
 
     </div>
-    {{- partial "script.html" -}}
+    {{- partial "script.html" . -}}
   </body>
 </html>
