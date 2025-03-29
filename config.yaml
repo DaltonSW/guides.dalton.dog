@@ -1,0 +1,11 @@
+baseURL: https://guides.dalton.dog/
+languageCode: en-us
+title: Dalton's Game Guides
+copyright: 2025
+
+caches:
+  images:
+    dir: :cacheDir/images
+
+params:
+  subtitle: Checklists and Tables and Such
