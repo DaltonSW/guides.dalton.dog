@@ -1,0 +1,34 @@
+  {{- $page := .page }}
+  {{- range .menuEntries }}
+    {{- $hasChildren := gt (len .Children) 0 }}
+    {{- $linkClass := "nav-link" }}
+    {{- if $page.IsMenuCurrent .Menu . }}
+      {{- $linkClass = print $linkClass " active" }}
+    {{- else if $page.HasMenuCurrent .Menu .}}
+      {{- $linkClass = print $linkClass " active" }}
+    {{- end }}
+    {{- $attrs := dict "href" .URL "class" $linkClass }}
+    {{- if $hasChildren }}
+      {{- $attrs = merge $attrs (dict "class" (print $linkClass " dropdown-toggle") "data-bs-toggle" "dropdown" "role" "button" "aria-expanded" "false") }}
+    {{- end }}
+    {{- $name := .Name }}
+    {{- with .Identifier }}
+      {{- with T . }}
+        {{- $name = . }}
+      {{- end }}
+    {{- end }}
+    <li class="nav-item{{ if $hasChildren }} dropdown{{ end }}">
+      <a
+        {{- range $k, $v := $attrs }}
+          {{- with $v }}
+            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+          {{- end }}
+        {{- end -}}
+      >{{ $name }}</a>
+      {{- if $hasChildren }}
+        <ul class="dropdown-menu">
+          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .Children) }}
+        </ul>
+      {{- end }}
+    </li>
+  {{- end }}

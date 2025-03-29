@@ -1,8 +1,7 @@
 {{ define "main" }}
 <main>
-  {{- partial "game-header.html" . -}}
   <article>
-    <h1>{{ .Title }}</h1>
+    <h1 class="d-flex justify-content-center">{{ .Title }}</h1>
     {{ .Content }}
   </article>
 </main>

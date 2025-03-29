@@ -2,6 +2,7 @@
 menus:
     main:
         parent: Sekiro
-title: Cheat Sheat
+        identifier: "sekiro_cheat_sheet"
+title: Cheat Sheet
 draft: false
 ---

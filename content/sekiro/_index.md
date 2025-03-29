@@ -1,6 +1,4 @@
 ---
-menus:
-    main:
-        parent: Games
+menu: main
 title: Sekiro
 ---
