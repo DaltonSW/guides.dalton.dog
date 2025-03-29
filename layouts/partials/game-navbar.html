@@ -1,0 +1,25 @@
+  <!-- Home Button -->
+  <li class="nav-item">
+    <a class="nav-link {{ if eq .CurrentSection.Permalink $.Permalink }}active{{ end }}" href="{{ .CurrentSection.Permalink }}">
+          {{ .CurrentSection.Title }} Home
+    </a>
+  </li>
+
+  <!-- Child Pages -->
+  {{ if .Section }}
+    {{ range .CurrentSection.Pages }}
+      <li class="nav-item">
+        <a class="nav-link {{ if eq .Permalink $.Permalink }}active{{ end }}" href="{{ .Permalink }}">
+          {{ .Title }}
+        </a>
+      </li>
+    {{ end }}
+  {{ else }}
+    {{ range .Pages }}
+      <li class="nav-item">
+        <a class="nav-link {{ if eq .Permalink $.Permalink }}active{{ end }}" href="{{ .Permalink }}">
+          {{ .Title }}
+        </a>
+      </li>
+    {{ end }}
+  {{ end }}

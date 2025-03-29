@@ -1,7 +1,6 @@
 {{- $page := .page }}
-{{- $menuID := .menuID }}
 
-{{- with index site.Menus $menuID }}
+{{- with site.Menus.main }}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
 
@@ -17,23 +16,24 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+        {{- if $page.IsHome }}
+        <!-- Game Selection Dropdown -->
         <li class="nav-item dropdown">
-          {{- $mainLabel := "Games"}}
-          {{- if not $page.IsHome}}
-            {{- $mainLabel = (strings.Replace $page.Section "-" " ") | strings.Title }}
-          {{- end }}
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ $mainLabel }}
+            Games 
           </a>
           <ul class="dropdown-menu">
             {{- range . }}
-            <li><a class="dropdown-item" href="{{- .URL }}">{{- .Name }}</a></li>
+              <li><a class="dropdown-item" href="{{- .URL }}">{{- .Name }}</a></li>
             {{- end }}
           </ul>
         </li>
+        {{- else }}
+          {{- partial "game-navbar.html" $page }}
+        {{- end }}
+
       </ul>
     </div>
-
   </div>
 </nav>
 {{- end }}
