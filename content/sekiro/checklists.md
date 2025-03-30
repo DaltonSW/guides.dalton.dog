@@ -11,6 +11,7 @@ draft: false
 ## Achievements
 
 - Man Without Equal
+    - Note: Test note
 - Ashina Traveler
 - Master of the Prosthetic
 - Height of Technique

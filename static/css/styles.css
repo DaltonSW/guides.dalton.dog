@@ -1,7 +1,12 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   padding: 1rem;
   background: #f9f9f9;
+}
+
+ul>em {
+  padding-left: 2em;
+  font-family: "Martian Mono" !important;
 }
 
 article {
