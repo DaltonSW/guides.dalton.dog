@@ -1,0 +1,22 @@
+{
+  "name": "guides.dalton.dog",
+  "version": "1.0.0",
+  "description": "Dalton's Guides",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaltonSW/guides.dalton.dog.git"
+  },
+  "author": "Dalton Williams",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaltonSW/guides.dalton.dog/issues"
+  },
+  "homepage": "https://github.com/DaltonSW/guides.dalton.dog#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}
