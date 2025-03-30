@@ -1,0 +1,31 @@
+// Bootstrap overrides
+$font-family-base: "Montserrat";
+
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+body {
+  padding: 1rem;
+  background: #f9f9f9;
+}
+
+ul>em {
+  padding-left: 2em;
+  font-family: "Martian Mono" !important;
+}
+
+article {
+  max-width: 800px;
+  margin: auto;
+}
+
+.checklist {
+  margin: 1rem 0;
+}
+
+.checklist-item {
+  margin: 0.5rem 0;
+}
+
+.checklist-item input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
