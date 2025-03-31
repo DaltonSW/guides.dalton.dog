@@ -1,0 +1,63 @@
+{{/* Use a regex to match a markdown H2 header (## Title) on its own line */}}
+{{ $matches := findRE "(?m)^##\\s+.*" .Inner }}
+{{ $title := "" }}
+{{ $id := "" }}
+{{ $body := .Inner }}
+
+{{/* If a header was found, grab it as the title */}}
+{{ if gt (len $matches) 0 }}
+  {{ $title = index $matches 0 }}
+  {{ $title = replaceRE "^## " "" $title }}
+  {{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" .Inner }}
+  {{ $id = urlize $title }}
+{{ end }}
+
+{{ $checkable := or (.Get "checkable") true }}
+
+<div class="card mb-3 border border-danger" id="{{ $id }}">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    {{ if $checkable }}
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="{{ $id }}-check"
+             onchange="toggleCardBorder('{{ $id }}')">
+      </div>
+    {{ end }}
+    <h5 class="mb-0 flex-grow-1 ms-2">{{ $title }}</h5>
+    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" onclick="toggleCollapseIcon('{{ $id }}')"
+            data-bs-target="#{{ $id }}-body" aria-expanded="false" aria-controls="{{ $id }}-body">
+      <i class="bi bi-caret-right-fill" id="{{$id}}-card-toggle-icon"></i>
+    </button>
+  </div>
+  <div id="{{ $id }}-body" class="collapse card-body">
+    {{ $body }}
+  </div>
+</div>
+
+<script>
+  function toggleCardBorder(cardId) {
+    const card = document.getElementById(cardId);
+    const checkbox = document.getElementById(cardId + "-check");
+    const toggleIcon = document.getElementById(cardId + "-card-toggle-icon")
+
+    if (checkbox.checked) {
+      card.classList.remove("border-danger");
+      card.classList.add("border-success");
+    } else {
+      card.classList.remove("border-success");
+      card.classList.add("border-danger");
+    }
+  }
+
+  function toggleCollapseIcon(cardId) {
+    const card = document.getElementById(cardId + "-body");
+    const toggleIcon = document.getElementById(cardId + "-card-toggle-icon")
+
+    if (toggleIcon.classList.contains("bi-caret-right-fill")) {
+      toggleIcon.classList.remove("bi-caret-right-fill");
+      toggleIcon.classList.add("bi-caret-down-fill");
+    } else {
+      toggleIcon.classList.remove("bi-caret-down-fill");
+      toggleIcon.classList.add("bi-caret-right-fill");
+    }
+  }
+</script>

@@ -3,9 +3,12 @@ $font-family-base: "Montserrat";
 
 @import "node_modules/bootstrap/scss/bootstrap";
 
+h1 {
+  text-align: center;
+}
+
 body {
   padding: 1rem;
-  background: #f9f9f9;
 }
 
 ul>em {
