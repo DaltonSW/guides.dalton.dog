@@ -32,3 +32,10 @@ function toggleCollapse(id) {
     }
   }
 }
+
+function toggleHideChecked() {
+  var checklist = document.querySelector(".checklist");
+  if (checklist) {
+    checklist.classList.toggle("hide-checked");
+  }
+}

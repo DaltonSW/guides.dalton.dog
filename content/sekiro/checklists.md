@@ -6,12 +6,14 @@ title: Checklists
 draft: false
 ---
 
-{{< checklist >}}
+<!--{{< hide-checked-button >}}-->
+
+{{< card-checklist >}}
 
 ## Achievements
 
 - Man Without Equal
-    - Note: Test note
+note: Test note
 - Ashina Traveler
 - Master of the Prosthetic
 - Height of Technique
@@ -45,7 +47,7 @@ draft: false
 - Great Serpent
 - Great Colored Carp
 
-{{< /checklist >}}
+{{< /card-checklist >}}
 
 {{< checklist >}}
 
@@ -94,7 +96,7 @@ draft: false
 
 {{< /checklist >}}
 
-{{< checklist >}}
+{{< card-checklist >}}
 
 ## Prosthetic Tool Upgrades
 
@@ -159,7 +161,7 @@ draft: false
 - Mountain Echo
 - Malcontent
 
-{{< /checklist >}}
+{{< /card-checklist >}}
 
 {{< checklist >}}
 

@@ -1,0 +1,73 @@
+{{ $trimmed := trim .Inner "\n" }}
+{{ $lines := split $trimmed "\n" }}
+
+{{ $currentHeader := "" }}
+{{ $openList := false }}
+{{ $itemCounter := 0 }}
+
+<div class="card text-white bg-secondary">
+<!-- Start looping over lines in the block -->
+  {{ range $index, $line := $lines }}
+    {{ $line = trim $line " " }}
+
+    <!-- Skip empty lines -->
+    {{ if eq (len $line) 0 }}{{ continue }}{{ end }}
+
+    <!-- Start the card and initialize variables -->
+    {{ if and (hasPrefix $line "##") (eq $currentHeader "") }}
+
+        <!-- Set state variables -->
+        {{ $headerText := trim (replace $line "##" "") " " }}
+        {{ $headerID := urlize $headerText }}
+        {{ $currentHeader = $headerID }}
+        {{ $openList = true }}
+
+        <!-- Card header -->
+        <div class="card-header">
+          <h2>{{ $headerText }}
+          <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $headerID }}-list" aria-expanded="true" aria-controls="{{ $headerID }}-list">Toggle
+          </button>
+          </h2>
+        </div>
+
+        <!-- Start main card body -->
+        <div class="collapse card-body show" id="{{ $headerID }}-list">
+          <ul class="checklist">
+
+    {{ else if hasPrefix $line "###" }}
+
+      <h3>{{ trim (replace $line "###" "" ) " "}}</h3>
+
+    {{ else }}
+
+      <!-- For a regular checklist item: first remove any leading "- " -->
+      {{ $cleanLine := replaceRE "^-\\s+" "" $line }}
+
+      <!-- Check if the line is a note -->
+      {{ if hasPrefix (lower $cleanLine) "note: "}}
+        {{ $noteText := trim (replace (lower $cleanLine) "note:" "") " " }}
+        <em class="checklist-note">{{ $noteText }}</em>
+      {{ else }}
+
+        <!-- Look for a category marker at the beginning of the item (e.g., "[boss] ") -->
+        {{ $.Scratch.Set "category" "default" }}
+        {{ $matches := findRE "^\\[(\\w+)\\]\\s+" $cleanLine }}
+        {{ if gt (len $matches) 0 }}
+          {{ $.Scratch.Set "category" (index (index $matches 0) 1) }}
+          {{ $cleanLine = replaceRE "^\\[(\\w+)\\]\\s+" "" $cleanLine }}
+        {{ end }}
+        {{ $cat := $.Scratch.Get "category" }}
+
+        {{ $itemCounter = add $itemCounter 1 }}
+        <li class="checklist-item" data-category="{{ $cat }}" id="{{ $currentHeader }}-item-{{ $itemCounter }}">
+          <input type="checkbox" id="{{ $currentHeader }}-checkbox-{{ $itemCounter }}">
+          <label for="{{ $currentHeader }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
+        </li>
+
+      {{ end }} <!-- End note check if/else -->
+
+      {{ end }} <!-- End header if/else -->
+    {{ end }} <!-- End range -->
+    </ul> <!-- Close checklist -->
+  </div> <!-- Close card-body -->
+</div> <!-- Close card -->

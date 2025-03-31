@@ -1,7 +1,7 @@
 // Bootstrap overrides
 $font-family-base: "Montserrat";
 
-@import "node_modules/bootstrap/scss/bootstrap.scss";
+@import "node_modules/bootstrap/scss/bootstrap";
 
 body {
   padding: 1rem;
@@ -18,6 +18,11 @@ article {
   margin: auto;
 }
 
+.active {
+  text-decoration: underline;
+}
+
+
 .checklist {
   margin: 1rem 0;
 }
@@ -28,4 +33,9 @@ article {
 
 .checklist-item input[type="checkbox"] {
   margin-right: 0.5rem;
+}
+
+/* When .hide-checked is applied, hide items with checked checkboxes */
+.hide-checked .checklist-item input[type="checkbox"]:checked ~ label {
+  display: none;
 }
