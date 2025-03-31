@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
   {{- partial "head.html" . -}}
   <body>
-    <div id="baseContainer">
+    <div id="baseContainer" class="container-xl">
       {{- partial "navbar.html" (dict "page" . ) . }}
-      <div id="contentContainer">
+      <div id="contentContainer" class="d-flex justify-content-center">
         <div id="content" class="container">
-          <main class="d-flex justify-content-center">
+          <main class="d-flex-lg flex-column justify-content-center">
             {{- block "main" . }}{{- end }}
           </main>
           {{- partial "footer.html" . -}}
