@@ -1,128 +1,63 @@
+{{/* Use a regex to match a markdown H2 header (## Title) on its own line */}}
+{{ $matches := findRE "(?m)^##\\s+.*" .Inner }}
+{{ $title := "" }}
+{{ $id := "" }}
+{{ $body := .Inner }}
+
+{{/* If a header was found, grab it as the title */}}
+{{ if gt (len $matches) 0 }}
+  {{ $title = index $matches 0 }}
+  {{ $title = replaceRE "^## " "" $title }}
+  {{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" .Inner }}
+  {{ $id = urlize $title }}
+{{ end }}
+{{ $openList := false }}
+{{ $itemCounter := 0 }}
+
 {{ $trimmed := trim .Inner "\n" }}
 {{ $lines := split $trimmed "\n" }}
 
 <ul class="checklist">
-
-  <!-- Initialize state variables -->
-  {{ $currentHeader := "default" }}
-  {{ $openList := false }}
-  {{ $itemCounter := 0 }}
-  {{ $openSubList := false }}
-  {{ $currentSubHeader := "" }}
-  {{ $subItemCounter := 0 }}
-
-  <!-- Start looping over lines in the checklist -->
+<!-- Start looping over lines in the block -->
   {{ range $index, $line := $lines }}
     {{ $line = trim $line " " }}
-    {{ if gt (len $line) 0 }}
 
-      <!-- Handle sub-checklist header: lines starting with "###" -->
-      {{ if hasPrefix $line "###" }}
-        {{ if $openSubList }}
-          </ul>
-          {{ $openSubList = false }}
+    <!-- Skip empty lines -->
+    {{ if eq (len $line) 0 }}{{ continue }}{{ end }}
+
+
+    {{ if hasPrefix $line "###" }}
+
+      <h3>{{ trim (replace $line "###" "" ) " "}}</h3>
+
+    {{ else }}
+
+      <!-- For a regular checklist item: first remove any leading "- " -->
+      {{ $cleanLine := replaceRE "^-\\s+" "" $line }}
+
+      <!-- Check if the line is a note -->
+      {{ if hasPrefix (lower $cleanLine) "note: "}}
+        {{ $noteText := trim (replace (lower $cleanLine) "note:" "") " " }}
+        <em class="checklist-note">{{ $noteText }}</em>
+      {{ else }}
+
+        <!-- Look for a category marker at the beginning of the item (e.g., "[boss] ") -->
+        {{ $.Scratch.Set "category" "default" }}
+        {{ $matches := findRE "^\\[(\\w+)\\]\\s+" $cleanLine }}
+        {{ if gt (len $matches) 0 }}
+          {{ $.Scratch.Set "category" (index (index $matches 0) 1) }}
+          {{ $cleanLine = replaceRE "^\\[(\\w+)\\]\\s+" "" $cleanLine }}
         {{ end }}
+        {{ $cat := $.Scratch.Get "category" }}
 
-        {{ $subHeaderText := trim (replace $line "###" "") " " }}
-        {{ $subHeaderID := urlize $subHeaderText }}
-        <li class="sub-checklist-header" id="{{ $currentHeader }}-{{ $subHeaderID }}-header">
-          <h4>
-            {{ $subHeaderText }}
-            <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $currentHeader }}-{{ $subHeaderID }}-list" aria-expanded="false" aria-controls="{{ $currentHeader }}-{{ $subHeaderID }}-list">Toggle
-            </button>
-          </h4>
+        {{ $itemCounter = add $itemCounter 1 }}
+        <li class="checklist-item" data-category="{{ $cat }}" id="{{ $id }}-item-{{ $itemCounter }}">
+          <input type="checkbox" id="{{ $id }}-checkbox-{{ $itemCounter }}">
+          <label for="{{ $id }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
         </li>
-        <ul class="sub-checklist-section collapse show" id="{{ $currentHeader }}-{{ $subHeaderID }}-list">
-        {{ $openSubList = true }}
-        {{ $currentSubHeader = $subHeaderID }}
-        {{ $subItemCounter = 0 }}
 
-      <!-- Handle main checklist header: lines starting with "##" -->
-      {{ else if hasPrefix $line "##" }}
-        {{ if $openSubList }}
-          </ul>
-          {{ $openSubList = false }}
-        {{ end }}
+      {{ end }} <!-- End note check if/else -->
 
-        {{ if $openList }}
-          </ul>
-          {{ $openList = false }}
-        {{ end }}
-
-        {{ $headerText := trim (replace $line "##" "") " " }}
-        {{ $headerID := urlize $headerText }}
-
-        <li class="checklist-header" id="{{ $headerID }}-header">
-          <h3>
-            {{ $headerText }}
-            <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#{{ $headerID }}-list" aria-expanded="true" aria-controls="{{ $headerID }}-list">Toggle
-            </button>
-          </h3>
-        </li>
-        <ul class="checklist-section collapse show" id="{{ $headerID }}-list">
-        {{ $openList = true }}
-        {{ $currentHeader = $headerID }}
-        {{ $itemCounter = 0 }}
-
-      {{ else }} <!-- Else, normal checklist item -->
-
-        <!-- For a regular checklist item: first remove any leading "- " -->
-        {{ $cleanLine := replaceRE "^-\\s+" "" $line }}
-
-        <!-- Check if the line is a note -->
-        {{ if hasPrefix (lower $cleanLine) "note: "}}
-          {{ $noteText := trim (replace (lower $cleanLine) "note:" "") " " }}
-          <em class="checklist-note">{{ $noteText }}</em>
-        {{ else }}
-
-          <!-- Look for a category marker at the beginning of the item (e.g., "[boss] ") -->
-          {{ $.Scratch.Set "category" "default" }}
-          {{ $matches := findRE "^\\[(\\w+)\\]\\s+" $cleanLine }}
-          {{ if gt (len $matches) 0 }}
-            {{ $.Scratch.Set "category" (index (index $matches 0) 1) }}
-            {{ $cleanLine = replaceRE "^\\[(\\w+)\\]\\s+" "" $cleanLine }}
-          {{ end }}
-          {{ $cat := $.Scratch.Get "category" }}
-
-          {{ if $openSubList }} <!-- Add item to sub-list -->
-
-            {{ $subItemCounter = add $subItemCounter 1 }}
-            <li class="checklist-item" data-category="{{ $cat }}" id="{{ $currentHeader }}-{{ $currentSubHeader }}-item-{{ $subItemCounter }}">
-              <input type="checkbox" id="{{ $currentHeader }}-{{ $currentSubHeader }}-checkbox-{{ $subItemCounter }}">
-              <label for="{{ $currentHeader }}-{{ $currentSubHeader }}-checkbox-{{ $subItemCounter }}">{{ $cleanLine }}</label>
-            </li>
-
-          {{ else if $openList }} <!-- Add item to main list -->
-
-            {{ $itemCounter = add $itemCounter 1 }}
-            <li class="checklist-item" data-category="{{ $cat }}" id="{{ $currentHeader }}-item-{{ $itemCounter }}">
-              <input type="checkbox" id="{{ $currentHeader }}-checkbox-{{ $itemCounter }}">
-              <label for="{{ $currentHeader }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
-            </li>
-
-          {{ else }} <!-- If no list is open yet, open a default section -->
-
-            <ul class="checklist-section collapse show" id="default-list">
-              {{ $openList = true }}
-              {{ $currentHeader = "default" }}
-              {{ $itemCounter = 0 }}
-            </ul>
-            {{ $itemCounter = add $itemCounter 1 }}
-            <li class="checklist-item" data-category="{{ $cat }}" id="{{ $currentHeader }}-item-{{ $itemCounter }}">
-              <input type="checkbox" id="{{ $currentHeader }}-checkbox-{{ $itemCounter }}">
-              <label for="{{ $currentHeader }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
-            </li>
-
-          {{ end }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
-
-  {{ if $openSubList }}
-    </ul>
-  {{ end }}
-  {{ if $openList }}
-    </ul>
-  {{ end }}
-</ul>
+      {{ end }} <!-- End header if/else -->
+    {{ end }} <!-- End range -->
+</ul> <!-- Close checklist -->

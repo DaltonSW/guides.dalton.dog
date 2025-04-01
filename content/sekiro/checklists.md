@@ -6,9 +6,7 @@ title: Checklists
 draft: false
 ---
 
-<!--{{< hide-checked-button >}}-->
-
-{{< card-checklist >}}
+{{< checklist-card >}}
 
 ## Achievements
 
@@ -47,9 +45,9 @@ note: Test note
 - Great Serpent
 - Great Colored Carp
 
-{{< /card-checklist >}}
+{{< /checklist-card >}}
 
-{{< checklist >}}
+{{< checklist-card >}}
 
 ## Bosses 
 
@@ -69,17 +67,17 @@ note: Test note
 - Demon of Hatred
 - Isshin, the Sword Saint
 
-{{< /checklist >}}
+{{< /checklist-card >}}
 
-{{< checklist >}}
+{{< checklist-card >}}
 
 ## Minibosses 
 
 - Thing
 
-{{< /checklist >}}
+{{< /checklist-card >}}
 
-{{< checklist >}}
+{{< checklist-card >}}
 
 ## Prosthetic Tools 
 
@@ -94,9 +92,9 @@ note: Test note
 - Divine Abduction
 - Finger Whistle
 
-{{< /checklist >}}
+{{< /checklist-card >}}
 
-{{< card-checklist >}}
+{{< checklist-card >}}
 
 ## Prosthetic Tool Upgrades
 
@@ -161,20 +159,20 @@ note: Test note
 - Mountain Echo
 - Malcontent
 
-{{< /card-checklist >}}
+{{< /checklist-card >}}
 
-{{< checklist >}}
+{{< checklist-card >}}
 
 ## Skills
 
 - Thing
 
-{{< /checklist >}}
+{{< /checklist-card >}}
 
-{{< checklist >}}
+{{< checklist-card >}}
 
 ## Endings 
 
 - Thing
 
-{{< /checklist >}}
+{{< /checklist-card >}}

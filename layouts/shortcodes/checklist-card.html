@@ -1,0 +1,78 @@
+{{/* Use a regex to match a markdown H2 header (## Title) on its own line */}}
+{{ $matches := findRE "(?m)^##\\s+.*" .Inner }}
+{{ $title := "" }}
+{{ $id := "" }}
+{{ $body := .Inner }}
+
+{{/* If a header was found, grab it as the title */}}
+{{ if gt (len $matches) 0 }}
+  {{ $title = index $matches 0 }}
+  {{ $title = replaceRE "^## " "" $title }}
+  {{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" .Inner }}
+  {{ $id = urlize $title }}
+{{ end }}
+
+{{ $lines := split $body "\n" }}
+
+{{ $openList := false }}
+{{ $itemCounter := 0 }}
+
+<div class="card w-75 mb-3 border border-danger" id="{{ $id }}">
+
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <h5 class="mb-0 flex-grow-1 ms-2">{{ $title }}</h5>
+    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" onclick="toggleCollapseIcon('{{ $id }}')"
+            data-bs-target="#{{ $id }}-body" aria-expanded="false" aria-controls="{{ $id }}-body">
+      <i class="bi bi-caret-right-fill" id="{{$id}}-card-toggle-icon"></i>
+    </button>
+  </div>
+
+  {{/* For some reason, using a wrapper div for the collapsing thing makes the animation way smoother */}}
+  <div id="{{ $id }}-body" class="collapse">
+    <div class="card-body">
+      <ul class="checklist">
+      {{/* Start looping over lines in the block */}}
+        {{ range $index, $line := $lines }}
+          {{ $line = trim $line " " }}
+
+          {{/* Skip empty lines */}}
+          {{ if eq (len $line) 0 }}{{ continue }}{{ end }}
+
+          {{ if hasPrefix $line "###" }}
+
+            <h3>{{ trim (replace $line "###" "" ) " "}}</h3>
+
+          {{ else }}
+
+            {{/* For a regular checklist item: first remove any leading "- " */}}
+            {{ $cleanLine := replaceRE "^-\\s+" "" $line }}
+
+            {{/* Check if the line is a note */}}
+            {{ if hasPrefix (lower $cleanLine) "note: "}}
+              {{ $noteText := trim (replace (lower $cleanLine) "note:" "") " " }}
+              <em class="checklist-note">{{ $noteText }}</em>
+            {{ else }}
+
+              {{/* Look for a category marker at the beginning of the item (e.g., "[boss] ") */}}
+              {{ $.Scratch.Set "category" "default" }}
+              {{ $matches := findRE "^\\[(\\w+)\\]\\s+" $cleanLine }}
+              {{ if gt (len $matches) 0 }}
+                {{ $.Scratch.Set "category" (index (index $matches 0) 1) }}
+                {{ $cleanLine = replaceRE "^\\[(\\w+)\\]\\s+" "" $cleanLine }}
+              {{ end }}
+              {{ $cat := $.Scratch.Get "category" }}
+
+              {{ $itemCounter = add $itemCounter 1 }}
+              <li class="checklist-item" data-category="{{ $cat }}" id="{{ $id }}-item-{{ $itemCounter }}">
+                <input type="checkbox" id="{{ $id }}-checkbox-{{ $itemCounter }}">
+                <label for="{{ $id }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
+              </li>
+
+            {{ end }} {{/* End note check if/else */}}
+          {{ end }}   {{/* End header if/else */}}
+        {{ end }}     {{/* End range */}}
+      </ul>           {{/* Close checklist */}}
+
+    </div>
+  </div>
+</div>

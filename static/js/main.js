@@ -21,6 +21,32 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+function toggleCardBorder(cardId) {
+  const card = document.getElementById(cardId);
+  const checkbox = document.getElementById(cardId + "-check");
+  const toggleIcon = document.getElementById(cardId + "-card-toggle-icon")
+
+  if (checkbox.checked) {
+    card.classList.remove("border-danger");
+    card.classList.add("border-success");
+  } else {
+    card.classList.remove("border-success");
+    card.classList.add("border-danger");
+  }
+}
+
+function toggleCollapseIcon(cardId) {
+  const card = document.getElementById(cardId + "-body");
+  const toggleIcon = document.getElementById(cardId + "-card-toggle-icon")
+
+  if (toggleIcon.classList.contains("bi-caret-right-fill")) {
+    toggleIcon.classList.remove("bi-caret-right-fill");
+    toggleIcon.classList.add("bi-caret-down-fill");
+  } else {
+    toggleIcon.classList.remove("bi-caret-down-fill");
+    toggleIcon.classList.add("bi-caret-right-fill");
+  }
+}
 
 function toggleCollapse(id) {
   var section = document.getElementById(id + "-list");
