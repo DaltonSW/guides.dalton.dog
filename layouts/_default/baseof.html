@@ -4,9 +4,9 @@
   <body>
     <div id="baseContainer" class="container-xl">
       {{- partial "navbar.html" (dict "page" . ) . }}
-      <div id="contentContainer" class="d-flex justify-content-center">
-        <div id="content" class="container">
-          <main class="d-flex-lg flex-column justify-content-center">
+      <div id="contentContainer">
+        <div id="content">
+          <main class="d-flex flex-column align-items-center">
             {{- block "main" . }}{{- end }}
           </main>
           {{- partial "footer.html" . -}}
