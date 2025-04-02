@@ -12,7 +12,7 @@
   {{ $id = urlize $title }}
 {{ end }}
 
-{{ $checkable := or (.Get "checkable") true }}
+{{ $checkable := or (.Get "checkable") false }}
 
 <div class="card w-75 mb-3 border border-danger" id="{{ $id }}">
   <div class="card-header d-flex align-items-center justify-content-between">
@@ -22,17 +22,17 @@
              onchange="toggleCardBorder('{{ $id }}')">
       </div>
     {{ end }}
-    <h5 class="mb-0 flex-grow-1 ms-2">{{ $title }}</h5>
+    <h3 class="mb-0 flex-grow-1 ms-2">{{ $title }}</h3>
     <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" onclick="toggleCollapseIcon('{{ $id }}')"
-            data-bs-target="#{{ $id }}-body" aria-expanded="false" aria-controls="{{ $id }}-body">
-      <i class="bi bi-caret-right-fill" id="{{$id}}-card-toggle-icon"></i>
+            data-bs-target="#{{ $id }}-body" aria-expanded="true" aria-controls="{{ $id }}-body">
+      <i class="bi bi-caret-down-fill" id="{{$id}}-card-toggle-icon"></i>
     </button>
   </div>
 
   {{/* For some reason, using a wrapper div for the collapsing thing makes the animation way smoother */}}
-  <div id="{{ $id }}-body" class="collapse">
+  <div id="{{ $id }}-body" class="collapse show">
     <div class="card-body">
-    {{ $body | safeHTML }}
+    {{ $body | markdownify }}
     </div>
   </div>
 </div>

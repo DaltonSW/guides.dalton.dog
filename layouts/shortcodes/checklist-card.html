@@ -20,15 +20,15 @@
 <div class="card w-75 mb-3 border border-danger" id="{{ $id }}">
 
   <div class="card-header d-flex align-items-center justify-content-between">
-    <h5 class="mb-0 flex-grow-1 ms-2">{{ $title }}</h5>
+    <h2 class="mb-0 flex-grow-1 ms-2">{{ $title }}</h2>
     <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" onclick="toggleCollapseIcon('{{ $id }}')"
-            data-bs-target="#{{ $id }}-body" aria-expanded="false" aria-controls="{{ $id }}-body">
-      <i class="bi bi-caret-right-fill" id="{{$id}}-card-toggle-icon"></i>
+            data-bs-target="#{{ $id }}-body" aria-expanded="true" aria-controls="{{ $id }}-body">
+      <i class="bi bi-caret-down-fill" id="{{$id}}-card-toggle-icon"></i>
     </button>
   </div>
 
   {{/* For some reason, using a wrapper div for the collapsing thing makes the animation way smoother */}}
-  <div id="{{ $id }}-body" class="collapse">
+  <div id="{{ $id }}-body" class="collapse show">
     <div class="card-body">
       <ul class="checklist">
       {{/* Start looping over lines in the block */}}
@@ -63,9 +63,9 @@
               {{ $cat := $.Scratch.Get "category" }}
 
               {{ $itemCounter = add $itemCounter 1 }}
-              <li class="checklist-item" data-category="{{ $cat }}" id="{{ $id }}-item-{{ $itemCounter }}">
-                <input type="checkbox" id="{{ $id }}-checkbox-{{ $itemCounter }}">
-                <label for="{{ $id }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
+              <li class="form-check checklist-item" data-category="{{ $cat }}" id="{{ $id }}-item-{{ $itemCounter }}">
+                <input class="form-check-input" type="checkbox" id="{{ $id }}-checkbox-{{ $itemCounter }}">
+                <label class="form-check-label" for="{{ $id }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
               </li>
 
             {{ end }} {{/* End note check if/else */}}
