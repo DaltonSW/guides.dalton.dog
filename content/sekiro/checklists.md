@@ -11,7 +11,6 @@ draft: false
 ## Achievements
 
 - Man Without Equal
-note: Test note
 - Ashina Traveler
 - Master of the Prosthetic
 - Height of Technique
@@ -73,7 +72,52 @@ note: Test note
 
 ## Minibosses 
 
-- Thing
+- Leader Shigenori Yamauchi
+- General Naomori Karawada
+- Chained Ogre
+- General Tenzen Yamauchi
+- Headless (Ako)
+
+- Shinobi Hunter Enshin of Misen
+- Juzou the Drunkard (Hirata 1)
+
+- Blazing Bull
+- General Kuranosuke Matsumoto
+- Seven Ashina Spears - Toshikatsu Yamauchi
+- Lone Shadow Longswordsman
+- Ashina Elite - Jinsuke Saze
+- Headless (Ungo)
+
+- Snake Eyes Shirafuji
+- Long-Arm Centipede Giraffe
+- Headless (Gokan)
+
+- Shichimen Warrior (Bottomless Pit)
+
+- Armored Warrior
+- Long-Arm Centipede Sen'un
+
+- Shichimen Warrior (Ashina Depths)
+- Tokujiro the Glutton
+- Mist Noble
+- Headless (Gachiin)
+- O'Rin of the Water
+
+- Lone Shadow Masanaga (Great Serpent Shrine)
+- Lone Shadow Vilehand
+- Chained Ogre (2nd Invasion)
+
+- Lone Shadow Masanaga (Hirata 2)
+- Juzou the Drunkard (Hirata 2)
+
+- Okami Leader Shizu
+- Headless (Yashariku)
+- Shichimen Warrior (Fountainhead Palace)
+- Sakura Bull
+
+- Ashina Elite - Ujinari Mizuo
+- Shigekichi of the Red Guard
+- Seven Ashina Spears - Shume Masaji Oniwa
 
 {{< /checklist-card >}}
 
@@ -165,7 +209,77 @@ note: Test note
 
 ## Skills
 
-- Thing
+### Ashina Arts
+
+- Ascending Carp
+- Ashina Cross
+- Breath of Nature: Light
+- Descending Carp
+- Flowing Water
+- Ichimonji
+- Ichimonji: Double
+
+### Mushin Arts
+
+- Empowered Mortal Draw
+- Shadowfall
+- Spiral Cloud Passage
+
+### Prosthetic Arts
+
+- Chasing Slice
+- Emma's Medicine: Aroma
+- Emma's Medicine: Potency
+- Fang and Blade
+- Grappling Hook Attack
+- Living Force
+- Mid-air Prosthetic Tool
+- Nightjar Slash
+- Nightjar Slash Reversal
+- Projected Force
+- Sculptor's Karma: Blood
+- Sculptor's Karma: Scars
+
+### Shinobi Arts
+
+- A Shinobi's Karma: Body
+- A Shinobi's Karma: Mind
+- Breath of Life: Light
+- Mid-air Combat Arts
+- Mid-air Deflection
+- Mikiri Counter
+- Run and Slide
+- Shadowrush
+- Shinobi Eyes
+- Suppress Presence
+- Suppress Sound
+- Vault Over
+- Whirlwind Slash
+
+### Temple Arts
+
+- Devotion
+- High Monk
+- Most Virtuous Deed
+- Praying Strikes
+- Praying Strikes - Exorcism
+- Senpou Leaping Kicks
+- Virtuous Deed
+
+### Non-Art Skills
+
+- A Beast's Karma
+- Anti-air Death Blow
+- Breath of Life: Shadow
+- Breath of Nature: Shadow
+- Dragon Flash
+- Floating Passage
+- Mibu Breathing Technique
+- One Mind
+- Sakura Dance
+- Shinobi Medicine (Rank 1)
+- Shinobi Medicine (Rank 2)
+- Shinobi Medicine (Rank 3)
 
 {{< /checklist-card >}}
 
@@ -173,6 +287,9 @@ note: Test note
 
 ## Endings 
 
-- Thing
+- Shura (Obey Iron Code)
+- Immortal Severance (Save Kuro)
+- Purification (Alt. Save Kuro)
+- Return (Dragon's Homecoming)
 
 {{< /checklist-card >}}
