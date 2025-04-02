@@ -13,6 +13,13 @@ document.addEventListener('DOMContentLoaded', function() {
       checkbox.checked = checklistState[id];
     }
 
+    if (checkbox.checked) {
+      if (id.endsWith("-check")) {
+        const cardId = id.replace(/-check$/, "");
+        setCardBorderColor(cardId, "border-success");
+      }
+    }
+
     // Listen for changes and update state in localStorage
     checkbox.addEventListener('change', function() {
       checklistState[id] = checkbox.checked;
@@ -21,17 +28,61 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-card-id]").forEach(card => {
+    const checkboxes = card.querySelectorAll('input[type="checkbox"]');
+    const label = card.querySelector('[data-progress]');
+
+    const updateProgress = () => {
+      const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
+      label.textContent = `${checked} / ${checkboxes.length}`;
+
+      if (`${checked}` === `${checkboxes.length}`) {
+        label.classList.remove("text-bg-danger");
+        label.classList.add("text-bg-success");
+
+        setCardBorderColor(card.id, "border-success");
+
+        card.classList.remove("border-danger");
+        card.classList.add("border-success");
+      } else {
+        label.classList.remove("text-bg-success");
+        label.classList.add("text-bg-danger");
+
+        setCardBorderColor(card.id, "border-danger");
+      }
+
+    };
+
+    checkboxes.forEach(cb => cb.addEventListener("change", updateProgress));
+    updateProgress();
+  });
+});
+
+function setCardBorderColor(cardId,className) {
+  const card = document.getElementById(cardId);
+
+  card.classList.remove("border-primary");
+  card.classList.remove("border-secondary");
+  card.classList.remove("border-tertiary");
+  card.classList.remove("border-success");
+  card.classList.remove("border-danger");
+  card.classList.remove("border-warning");
+  card.classList.remove("border-info");
+  card.classList.remove("border-light");
+  card.classList.remove("border-dark");
+
+  card.classList.add(className);
+}
+
 function toggleCardBorder(cardId) {
   const card = document.getElementById(cardId);
   const checkbox = document.getElementById(cardId + "-check");
-  const toggleIcon = document.getElementById(cardId + "-card-toggle-icon")
 
   if (checkbox.checked) {
-    card.classList.remove("border-danger");
-    card.classList.add("border-success");
+    setCardBorderColor(cardId, "border-success");
   } else {
-    card.classList.remove("border-success");
-    card.classList.add("border-danger");
+    setCardBorderColor(cardId, "border-danger");
   }
 }
 
