@@ -1,7 +1,7 @@
 {{ define "main" }}
 <main>
   <h1>Welcome to {{ .Site.Title }}</h1>
-  <section class="posts">
+  <section class="posts d-flex flex-column align-items-center">
     {{ range .Pages }}
       <article>
         <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>

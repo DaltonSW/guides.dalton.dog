@@ -14,7 +14,8 @@
       </div>
 
     </div>
-    <script src="{{ "js/main.js" | relURL }}"></script>
+    {{ $js := resources.Get "ts/main.ts" | js.Build }}
+    <script src="{{ $js.Permalink }}" defer></script>
     {{- partial "script.html" . -}}
   </body>
 </html>
