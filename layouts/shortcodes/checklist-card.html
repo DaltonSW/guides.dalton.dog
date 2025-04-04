@@ -51,28 +51,21 @@
             {{/* For a regular checklist item: first remove any leading "- " */}}
             {{ $cleanLine := replaceRE "^-\\s+" "" $line }}
 
-            {{/* Check if the line is a note */}}
-            {{ if hasPrefix (lower $cleanLine) "note: "}}
-              {{ $noteText := trim (replace (lower $cleanLine) "note:" "") " " }}
-              <em class="checklist-note">{{ $noteText }}</em>
-            {{ else }}
+            {{/* Look for a category marker at the beginning of the item (e.g., "[boss] ") */}}
+            {{ $.Scratch.Set "category" "default" }}
+            {{ $matches := findRE "^\\[(\\w+)\\]\\s+" $cleanLine }}
+            {{ if gt (len $matches) 0 }}
+              {{ $.Scratch.Set "category" (index (index $matches 0) 1) }}
+              {{ $cleanLine = replaceRE "^\\[(\\w+)\\]\\s+" "" $cleanLine }}
+            {{ end }}
+            {{ $cat := $.Scratch.Get "category" }}
 
-              {{/* Look for a category marker at the beginning of the item (e.g., "[boss] ") */}}
-              {{ $.Scratch.Set "category" "default" }}
-              {{ $matches := findRE "^\\[(\\w+)\\]\\s+" $cleanLine }}
-              {{ if gt (len $matches) 0 }}
-                {{ $.Scratch.Set "category" (index (index $matches 0) 1) }}
-                {{ $cleanLine = replaceRE "^\\[(\\w+)\\]\\s+" "" $cleanLine }}
-              {{ end }}
-              {{ $cat := $.Scratch.Get "category" }}
+            {{ $itemCounter = add $itemCounter 1 }}
+            <li class="form-check checklist-item" data-category="{{ $cat }}" id="{{ $id }}-item-{{ $itemCounter }}">
+              <input class="form-check-input" type="checkbox" id="{{ $id }}-checkbox-{{ $itemCounter }}">
+              <label class="form-check-label" for="{{ $id }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
+            </li>
 
-              {{ $itemCounter = add $itemCounter 1 }}
-              <li class="form-check checklist-item" data-category="{{ $cat }}" id="{{ $id }}-item-{{ $itemCounter }}">
-                <input class="form-check-input" type="checkbox" id="{{ $id }}-checkbox-{{ $itemCounter }}">
-                <label class="form-check-label" for="{{ $id }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
-              </li>
-
-            {{ end }} {{/* End note check if/else */}}
           {{ end }}   {{/* End header if/else */}}
         {{ end }}     {{/* End range */}}
       </ul>           {{/* Close checklist */}}
