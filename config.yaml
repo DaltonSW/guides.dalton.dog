@@ -10,3 +10,10 @@ caches:
 params:
   author: Dalton Williams
   subtitle: Checklists and Tables and Such
+
+markup:
+  goldmark:
+    parser:
+      attribute:
+        block: true
+        title: true

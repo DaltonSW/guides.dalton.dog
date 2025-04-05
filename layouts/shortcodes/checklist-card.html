@@ -16,6 +16,7 @@
 
 {{ $openList := false }}
 {{ $itemCounter := 0 }}
+{{ $prevIndent := 0 }}
 
 <div class="card w-75 mb-3 border border-danger" data-card-id="{{ $id }}" id="{{ $id }}">
 
@@ -36,8 +37,8 @@
     <div class="card-body">
       <ul class="checklist">
       {{/* Start looping over lines in the block */}}
-        {{ range $index, $line := $lines }}
-          {{ $line = trim $line " " }}
+        {{ range $index, $rawLine := $lines }}
+          {{ $line := trim $rawLine " " }}
 
           {{/* Skip empty lines */}}
           {{ if eq (len $line) 0 }}{{ continue }}{{ end }}
@@ -48,23 +49,47 @@
 
           {{ else }}
 
+            {{ $spaces := 0}}
+            {{ $matches := findRE "^\\s*" $rawLine }}
+            {{ if gt (len $matches) 0}}
+              {{ $spaces = len (index $matches 0) }}
+            {{ end }}
+
+            {{ $indent := div $spaces 2 }} {{/* every 2 spaces = one level */}}
+
+            {{/* Open or close lists based on indent level */}}
+            {{ if gt $indent $prevIndent }}
+              {{ range seq $prevIndent (sub $indent 1) }}
+                <ul class="checklist">
+              {{ end }}
+            {{ else if lt $indent $prevIndent }}
+              {{ range seq $indent (sub $prevIndent 1) }}
+                </li></ul>
+              {{ end }}
+              </li>
+            {{ else if ne $index 0 }}
+              </li>
+            {{ end }}
+
             {{/* For a regular checklist item: first remove any leading "- " */}}
             {{ $cleanLine := replaceRE "^-\\s+" "" $line }}
 
-            {{/* Look for a category marker at the beginning of the item (e.g., "[boss] ") */}}
-            {{ $.Scratch.Set "category" "default" }}
-            {{ $matches := findRE "^\\[(\\w+)\\]\\s+" $cleanLine }}
+            {{/* Look for a category marker at the beginning of the item (e.g. "@boss") */}}
+            {{ $tagRegex := "\\@[\\w-]+\\s+" }}
+            {{ $category := "default" }}
+            {{ $matches := findRE $tagRegex $cleanLine }}
             {{ if gt (len $matches) 0 }}
-              {{ $.Scratch.Set "category" (index (index $matches 0) 1) }}
-              {{ $cleanLine = replaceRE "^\\[(\\w+)\\]\\s+" "" $cleanLine }}
+              {{ $category = replaceRE "\\@" "" (index $matches 0) }}
+              {{ $cleanLine = replaceRE $tagRegex "" $cleanLine }}
             {{ end }}
-            {{ $cat := $.Scratch.Get "category" }}
 
             {{ $itemCounter = add $itemCounter 1 }}
-            <li class="form-check checklist-item" data-category="{{ $cat }}" id="{{ $id }}-item-{{ $itemCounter }}">
+            <li class="form-check checklist-item" data-category="{{ $category }}" id="{{ $id }}-item-{{ $itemCounter }}">
               <input class="form-check-input" type="checkbox" id="{{ $id }}-checkbox-{{ $itemCounter }}">
               <label class="form-check-label" for="{{ $id }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
             </li>
+
+            {{ $prevIndent = $indent }}
 
           {{ end }}   {{/* End header if/else */}}
         {{ end }}     {{/* End range */}}
