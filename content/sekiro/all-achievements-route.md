@@ -12,11 +12,16 @@ It will be glitchless, and is not intended to be a speedrunning route.
 
 ## Playthrough 1: Purification Ending
 
+### Ashina Reservoir
+
 - Run to Kuro and get items
-    - Kusabimaru (Achievement: Revered Blade)
-    - Healing Gourd
+    - @sk-trophy Kusabimaru (Achievement: Revered Blade)
+    - @sk-upgrade Healing Gourd
 - @sk-boss Genichiro (ok to lose)
-- Wake up in Sculptor's Hut (Achievement: Shinobi Prosthetic)
-- Shuriken Wheel
+
+### Dilapidated Temple
+
+- @sk-trophy Wake up in Sculptor's Hut (Achievement: Shinobi Prosthetic)
+- @sk-upgrade Shuriken Wheel
 
 {{</checklist-card>}}
