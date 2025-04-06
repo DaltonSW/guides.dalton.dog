@@ -1,0 +1,48 @@
+// NerdFont icons
+@import "https://www.nerdfonts.com/assets/css/webfont.css";
+
+@font-face {
+  font-family: 'Symbols Nerd Font Mono';
+  font-style: normal;
+  src: local('Symbols Nerd Font Mono'), url("/fonts/NerdFonts-MonoSymbols.ttf"), format('ttf');
+}
+
+:root {
+  --symbols-font: 'Symbols Nerd Font Mono';
+
+  --upgrade-symbol: '󱡧 ';
+  --boss-symbol: ' ';
+  --coin-symbol: ' ';
+  --shop-symbol: ' ';
+  --trophy-symbol: ' ';
+}
+
+.sk-boss::before {
+  font-family: var(--symbols-font);
+  content: var(--boss-symbol);
+  color: $red-400;
+}
+
+.sk-shop::before {
+  font-family: var(--symbols-font);
+  content: var(--coin-symbol);
+  color: $yellow-400;
+}
+
+.sk-bead::before {
+  font-family: var(--symbols-font);
+  content: var(--upgrade-symbol);
+  color: $green-400;
+}
+
+.sk-skill::before {
+  font-family: var(--symbols-font);
+  content: var(--upgrade-symbol);
+  color: $green-400;
+}
+
+.sk-trophy::before {
+  font-family: var(--symbols-font);
+  content: var(--trophy-symbol);
+  color: $yellow-400;
+}
