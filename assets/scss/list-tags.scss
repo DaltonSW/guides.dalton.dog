@@ -10,17 +10,25 @@
 :root {
   --symbols-font: 'Symbols Nerd Font Mono';
 
-  --upgrade-symbol: '󱡧 ';
   --boss-symbol: ' ';
+  --campfire-symbol: '󰻝 ';
   --coin-symbol: ' ';
+  --gem-symbol: ' ';
   --shop-symbol: ' ';
   --trophy-symbol: ' ';
+  --upgrade-symbol: '󱡧 ';
 }
 
 .sk-boss::before {
   font-family: var(--symbols-font);
   content: var(--boss-symbol);
   color: $red-400;
+}
+
+.sk-upgrade::before {
+  font-family: var(--symbols-font);
+  content: var(--upgrade-symbol);
+  color: $blue-300;
 }
 
 .sk-shop::before {
