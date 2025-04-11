@@ -28,24 +28,6 @@ These are the quantities you'll need of each material to fully upgrade all prost
 
 {{</card>}}
 
-{{<checklist-card>}}
-
-## Playthrough 1: Purification Ending
-
-### Ashina Reservoir
-
-- Run to Kuro and get items
-    - @sk-trophy Kusabimaru (Achievement: Revered Blade)
-    - @sk-upgrade Healing Gourd
-- @sk-boss Genichiro (ok to lose)
-
-### Dilapidated Temple
-
-- @sk-trophy Wake up in Sculptor's Hut (Achievement: Shinobi Prosthetic)
-- @sk-upgrade Shuriken Wheel
-
-{{</checklist-card>}}
-
 This section is actually the route used in Aggy's (previously) WR run to use as a reference
 
 {{< checklist-card >}}
@@ -507,14 +489,244 @@ This section is actually the route used in Aggy's (previously) WR run to use as 
 
 {{< /checklist-card >}}
 
+- Everything is the same as last run up until you kill Corrupted Monk
+- Kill Monk
+- @key-item Shelter Stone
+- Warp back to Ashina Castle
+- Airswim up to Genichiro
+- Airswim over to Ape and do Ape Skip to grab White Lotus
+- Do Folding Screen Monkey Skip
+- @boss Kill Emma, the Gentle Blade
+- @boss Kill Isshin Ashina
+- @trophy Achievement: Shura Ending
+
 {{< checklist-card >}}
 
 ## Run 4 (NG+3): Dragon's Homecoming 
 
 {{< /checklist-card >}}
 
+- *Give back Kuro's Charm this run!*
+- Same as past runs up until after Bull Skip
+- Warp back to Ashina Castle Gate and go talk to Tengu. You can *refuse* his offer if you already have Ashina Esoteric Text
+
+- Run/swim through it and take the elevator up to Senpou
+
+### Senpou Temple
+
+- Use Puppeteer Ninjutsu on lil kite guy
+- Run/grapple up into the temple
+- Gourd Seed in front of statue
+- Lump of Fat Wax behing statue
+- Sit at idol and warp back to Ashina Castle
+
+### Ashina Castle ?
+
+- @miniboss Head all the way up to Genichiro
+- All the same lore shit as the first run, leave after Gun Fort Shrine Key
+- Head into Sunken Valley
+
+### Sunken Valley
+
+- Skip Snake Eyes and head up cliff. Grab Yellow Gunpowder
+- @miniboss Long-arm Centipede Giraffe
+    - Heavy Coin Purse
+- Fall into lake, swim into Risen Cave idol
+- Grapple and grab Adamantite Scrap
+- @key-item Fall down into poison swamp, run through dark cave, get Dried Serpent Viscera
+- @miniboss Leave into Ashina Depths and fight Snake Eyes, then head into Hidden Forest
+
+### Hidden Forest
+
+- Get Yashariku Sugar and Lump of Fat Wax by Headless
+- Get Yellow Gunpowder in forest
+- @miniboss Mist Noble
+    - Lump of Grave Wax
+- Lump of Fat Wax above Memorial Mob
+- @shop Exiled Memorial Mob
+    - Sell coin purses if needed
+    - Buy 2 Treasure Carp Scales (500 Sen each)
+    - Buy 2 Adamantite Scrap (600 Sen each)
+- Grab Yellow Gunpowder before O'rin
+- Grab Lump of Fat Wax and skip O'rin
+- @boss Corrupted Monk
+- @key-item Shelter Stone
+- Warp to Senpou Temple
+
+### Senpou Temple 2
+
+- Turn around and grapple across kites
+- Kill the Great Serpent
+    - @trophy Achievement: Great Serpent
+    - @key-item Fresh Serpent Viscera
+- @miniboss Warp back to idol and go fight Armored Warrior
+    - Prayer Bead
+    - Breath of Nature: Shadow
+- Drop into lake and grab items
+    - @key-item Holy Chapter: Infested
+    - Prayer Bead
+- Sit at Main Hall idol
+- @boss Folding Screen Monkeys
+- Talk to Divine Child
+    - @key-item Mortal Blade
+    - Mortal Draw
+- Ask for rice and eat it, then warp to Risen Cave idol
+- @key-item Do Ape Skip Redux and get Lotus of the Palace
+- Warp back to Ashina Castle
+
+### Ashina Castle
+
+- @boss Airswim up to Owl 1
+    - @key-item Aromatic Branch
+- All the Lore Shit pt2 from first run
+- Warp back to Divine Child
+
+### Senpou Temple 3
+
+- Give Divine Child the Holy Chapter and then get more rice
+- Eat the rice and then warp back to Hidden Village
+- Sit in palanquin and go to Fountainhead
+
+### Fountainhead Palace
+
+- @boss True Monk
+- Go past Great Carp in cave and sit at Palace Grounds idol
+- Warp back to Divine Child
+
+### Long Quest Segment
+
+- Ask for rice again. Eat it, then Save and Quit and reload
+- Give the Divine Child a persimmon
+    - @key-item Rice for Kuro
+- Warp to Kuro's Room and give him Rice, then Save and Quit and reload
+- Get Sweet Rice Ball, then immediately eat it
+- Warp back to Divine Child and talk to them
+- Save and Quit and reload, then talk to Divine Child in Monkey arena
+- Warp to Main Hall and run all the way down into the dark and get Holy Chapter: Dragon's Return
+- Grab Senpou Esoteric Text
+- Warp to Inner Sanctum and give the Divine Child the 2 viscera, then Save and Quit and reload
+- Knock on closed door, listen to dialogue, Save and Quit and reload
+- @key-item Obtain Frozen Tears
+- @boss Divine Dragon
+
+### Ashina Castle 5
+
+- Drop down to get Antechamber idol
+- Get Gourd Seed from chest
+- Drop down past Ogre and get Adamantite Scrap next to the door
+- Grab Fulminated Mercury on left side while running down stairs
+- Grab Fulminated Mercury next to Seven Spears
+- Buy as many skills as you can
+- @boss Isshin, the Sword Saint
+- Give Kuro *Dragon Tears and Frozen Tears*
+    - @trophy Achievement: Dragon's Homecoming
+- *Do NOT* start NG+4, warp back to Dilapidated Temple, then warp to Senpou temple
+
+
 {{< checklist-card >}}
 
 ## Run 5 (NG+4): Farming
+
+### Starting Stuff
+
+- Head toward Demon Bell, grab Black Gunpowder in shrine
+- Ring Demon Bell, then warp to Antechamber
+
+### Golden Vortex Upgrades
+
+- Farm Scrap Magnetite from the purple ninja
+- Warp to Dilapidated Temple
+- @shop Fujioka the Info Broker
+    - Gourd Seed (2000 Sen)
+- Go fit arm tools
+    - Loaded Axe
+    - Flame Vent
+    - Mist Raven
+- Upgrade everything up to Golden Vortex
+    - Spring-load Firecracker
+    - Double Divine Abduction
+    - Spring-load Flame Vent
+    - Loaded Umbrella - Magnet
+    - Okinaga's Flame Vent
+    - Mountain Echo
+    - Phoenix's Lilac Umbrella
+    - Golden Vortex
+- Warp back to Antechamber
+
+### Demon of Hatred
+
+- Drop down and turn around, then grab the Sabimaru
+- Run out door and all the way to Demon of Hatred
+    - Grab 2 Fulminated Mercury and Lump of Grave Wax en route
+- @boss Demon of Hatred
+    - Lapis Lazuli x2
+
+### Golden Vortex Farming
+
+- Warp to Senpou and farm up to 30 Lumps of Fat Wax
+- Warp to Fountainhead Palace
+
+### Warp to Fountainhead Palace
+
+- Run to Pot Noble and buy Lapis Lazuli for 6 Treasure Carp Scales
+- Farm up to 15 Lumps of Grave Wax
+- Warp to Antechamber
+
+### Stairs Farm
+
+- Farm up to 25 Yellow Gunpowder
+- Farm up to 19 Fulminated Mercury
+- Warp up to Antechamber and farm for all of the XP forever
+- Warp back to Dilapidated Temple
+
+### Dilapidated Temple
+
+- @shop Prayer Box
+    - Phantom Kunai (4500 Sen)
+    - Anti-air Deathblow Text (2200 Sen)
+    - Prayer Bead (1500 Sen)
+    - Prayer Bead (1500 Sen)
+    - Prayer Bead (2200 Sen)
+    - Prayer Bead (2200 Sen)
+    - Prayer Bead (2200 Sen)
+    - Prayer Bead (2200 Sen)
+    - Gourd Seed (2400 Sen)
+- Go fit Sabimaru
+    - @trophy All Prosthetic Tools
+- Start Upgrading Everything
+     - Spinning Shuriken
+     - Loaded Spear Thrust type
+     - Spring-load Axe
+     - Loaded Spear Cleave type
+     - Gouging Top
+     - Aged Feather Mist Raven
+     - Improved Sabimaru
+     - Long Spark
+     - Sparking Axe
+     - Phantom Kunai
+     - Spiral Spear
+     - Leaping Flame
+     - Sen Throw
+     - Great Feather Mist Raven
+     - Piercing Sabimaru
+     - Purple Fume Spark
+     - Malcontent
+     - Suzaku's Lotus Umbrella
+     - Lazulite Sacred Flame
+        - @trophy Achievement: Lazuline Upgrade
+     - Lazulite Axe
+     - Lazulite Sabimaru
+     - Lazulite Shuriken
+        - @trophy Achievement: Master of the Prosthetic
+- Warp to Kuro's Room
+- Talk to Emma and upgrade all gourds
+    - @trophy Achievement: Ultimate Healing Gourd
+- Talk to Emma and get Mushin Esoteric Text
+- Sit at idol and get Ninth Prayer Necklace and Final Prayer Necklace
+    - @trophy Achievement: Peak Physical Strength
+- Finish off upgrading all your skills
+    - @trophy Achievement: Height of Technique
+- @trophy Achievement: Sekiro
+- DONE!!!
 
 {{< /checklist-card >}}
