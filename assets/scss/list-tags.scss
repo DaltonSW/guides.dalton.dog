@@ -14,42 +14,51 @@
   --campfire-symbol: '󰻝 ';
   --coin-symbol: ' ';
   --gem-symbol: ' ';
+  --heart-symbol: ' ';
+  --heart-up-symbol: '󱐮 ';
+  --key-symbol: ' ';
   --shop-symbol: ' ';
   --trophy-symbol: ' ';
   --upgrade-symbol: '󱡧 ';
 }
 
-.sk-boss::before {
+.boss::before {
   font-family: var(--symbols-font);
   content: var(--boss-symbol);
-  color: $red-400;
+  color: $red-600;
 }
 
-.sk-upgrade::before {
+.miniboss::before {
+  font-family: var(--symbols-font);
+  content: var(--boss-symbol);
+  color: $red-200;
+}
+
+.upgrade::before {
   font-family: var(--symbols-font);
   content: var(--upgrade-symbol);
   color: $blue-300;
 }
 
-.sk-shop::before {
+.shop::before {
   font-family: var(--symbols-font);
   content: var(--coin-symbol);
   color: $yellow-400;
 }
 
-.sk-bead::before {
+.bead::before {
   font-family: var(--symbols-font);
   content: var(--upgrade-symbol);
   color: $green-400;
 }
 
-.sk-skill::before {
+.skill::before {
   font-family: var(--symbols-font);
   content: var(--upgrade-symbol);
   color: $green-400;
 }
 
-.sk-trophy::before {
+.trophy::before {
   font-family: var(--symbols-font);
   content: var(--trophy-symbol);
   color: $yellow-400;
