@@ -64,45 +64,43 @@ These are the quantities you'll need of each material to fully upgrade all prost
 
 ### Ashina Castle 1
 
+- Jump up past the gate and kill a "rat"
+- @shop Talk to Memorial Mob next to Tengu
+    - @trophy Achievement: Memorial Mob
+    - Sell collected coin purses
+    - Gourd Seed (1000 sen) (3/9)
+- Ascend rafters and grab Prayer Bead (4/40)
+- Talk to Tengu and Accept his quest
+- Talk to him again and get Ashina Esoteric Text (1/5)
 - @miniboss Blazing Bull
-    - Prayer Bead (4/40)
+    - Prayer Bead (5/40)
     - Shinobi Medicine - Rank 2
 - @key Go left after Bull, kill guard for Gatehouse Key
 - Grab Heavy Coin Purse next to spear
 - @tool Get Gyoubu's Broken Horn
+- @tool Go back to Memorial Mob and purchase Shinobi Firecrackers (500 Sen)
+- Use Homeward Idol back to Sculptor's Hut
+- Talk to the Sculptor. Receive Shinobi Esoteric Text (2/5)
+- Fit prosthetics:
+    - Loaded Shuriken
+    - Loaded Spear
+    - Shinobi Firecracker
+- Receive Prosthetic Esoteric Text (3/5)
+- Warp back to Ashina Castle
 - @miniboss Seven Ashina Spears - Shikibu Toshikatsu Yamauchi
-    - Prayer Bead (5/40)
-- @miniboss Lone Shadow Longswordsman
     - Prayer Bead (6/40)
-    - Mechanite Scraps (?)
+- @miniboss Lone Shadow Longswordsman
+    - Prayer Bead (7/40)
 - Jump into endless hole
 
 ### Castle Depths 
 
 - Bulging Coin Purse
 - @miniboss Snake Eyes Shirahagi
-    - Prayer Bead (7/40)
+    - Prayer Bead (8/40)
 - Yellow Gunpowder (next to big head)
-- Prayer Bead (atop big head) (8/40)
-- Sit at Hidden Forest idol, warp back to Ashina Castle Gate
-
-### Ashina Castle 2
-
-- @shop Talk to Memorial Mob next to Tengu
-    - @trophy Achievement: Memorial Mob
-    - Sell collected coin purses
-    - Gourd Seed (1000 sen) (3/9)
-    - @tool Shinobi Firecrackers (500 sen)
-- Talk to Tengu and Accept his quest
-- Ascend rafters and grab Prayer Bead (9/40)
-- Use Homeward Idol back to Sculptor's Hut
-- Talk to the Sculptor. Receive Shinobi Esoteric Text (1/5)
-- Fit prosthetics:
-    - Loaded Shuriken
-    - Loaded Spear
-    - Shinobi Firecracker
-- Receive Prosthetic Esoteric Text (2/5)
-- Warp to Hidden Forest idol
+- Prayer Bead (atop big head) (9/40)
+- Sit at Hidden Forest idol
 
 ### Hidden Forest 1
 
