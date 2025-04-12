@@ -117,20 +117,8 @@ These are the quantities you'll need of each material to fully upgrade all prost
 - Sit at Water Mill idol
 - Run past O'Rin and grab Lump of Fat Wax, grapple to bridge
 - Divine Confetti in house, Prayer Bead in attic (10/40), Heavy Coin Purse on roof
-- @boss Corrupted Monk
-    - Corrupted Monk Memory
-    - Mibu Breathing Technique
-- Grab Shelter Stone
-- Sit at Wedding Cave Door idol (Level ~14)
-    - Use Monk Memory
-    - Upgrade Necklace
-    - Grab Skills
-        - Mikiri Counter
-        - Run & Slide
-        - Suppress Prescence
-        - Vault Over
-        - Shinobi Eyes
-- Warp to Ashina Castle
+- Warp back to Ashina Castle
+
 
 ### Ashina Castle 3
 
@@ -139,19 +127,25 @@ These are the quantities you'll need of each material to fully upgrade all prost
 - Run to the right and flip the hidden wall panel
     - Grab Prayer Bead (11/40)
     - Grab Heavy Coin Purse and Light Coin Purse
-- Run up stairs and sit at ??? idol
+- Run up stairs and sit at Upper Dojo idol
 - @miniboss Ashina Elite - Jinsuke Saze
     - Prayer Bead (12/40)
-- Airswim up to Genichiro
+- @boss Jump out window up to Genichiro
     - Memory: Genichiro
-    - Bloodsmoke Ninjutsu
+    - Bloodsmoke Ninjutsu (1/3)
 - Talk to Kuro, decline to leave, acquire Immortal Severance Text
 - Sit at Upper Tower idol, use Genichiro's memory
 - Go talk to Isshin, get Unrefined Sake, warp back to Kuro's room
 - @key Get Gun Fort Shrine Key
 - Leave the room, drop down, fight General Kuranosuke Matsumoto
     - Prayer Bead (13/40)
-- Run down stairs, enter Ashina Dungeon, and elevator up to Senpou
+- Warp back to Water Mill idol real quick
+- @boss Corrupted Monk
+    - Corrupted Monk Memory
+    - Mibu Breathing Technique
+- Grab Shelter Stone
+- Warp to Ashina Castle
+- Enter Ashina Dungeon, and elevator up to Senpou
 
 ### Mt. Senpou
 
@@ -167,37 +161,27 @@ These are the quantities you'll need of each material to fully upgrade all prost
 - @boss Folding Screen Monkeys
     - @trophy Folding Screen Monkeys
     - Memory: Folding Screen Monkeys
-    - Puppeteer Ninjutsu
+    - Puppeteer Ninjutsu (2/3)
 - Grab Mortal Blade
 - Equip Mortal Slash art and Bloodsmoke Ninjutsu
-- Sit at Inner Sanctum idol
-    - Use Folding Screen Monkey Memory
-    - Grab Skills
-        - @skill Whirlwind Slash
-        - @skill Mid-air Reflection
-        - @skill A Shinobi's Karma: Body
-        - @skill A Shinboi's Karma: Mind
-        - @skill Mid-air Combat Arts
-- Warp to Kuro's Room
+- Sit at Inner Sanctum idol, warp to Kuro's Room
 
 ### Sunken Valley
 
 - Jump off castle toward valley, run through gate past monkeys
-- @miniboss Lone Shadow Masanaga the Spear-Bearer
-    - Prayer Bead (17/40)
-- Jump off cliff to the right, grab Prayer Bead near ghosts (18/40)
+- Jump off cliff to the right, grab Prayer Bead near ghosts (17/40)
 - Save and Quit, toward the Sunken Valley idol
 - Go left out of the cave, climb cliff, grab Gourd Seed (7/9)
 - Grab Yellow Gunpowder
 - @miniboss Snake Eyes Shirafuji
-    - Prayer Bead (19/40)
+    - Prayer Bead (18/40)
 - Climb cliff, grab Yellow Gunpowder and Heavy Coin Purse
 - Grab Gun Fort idol
 - @boss Long-arm Centipede Giraffe
     - Yellow Gunpowder
-    - Prayer Bead (20/40)
+    - Prayer Bead (19/40)
 - @tool Grab Large Fan
-- Head under floorboards, grab Prayer Bead in the dark (21/40)
+- Head under floorboards, grab Prayer Bead in the dark (20/40)
 
 ### Sunken Valley Passage
 
@@ -221,7 +205,7 @@ These are the quantities you'll need of each material to fully upgrade all prost
 
 - Go to Memorial Mob
     - Sell collected coin purses
-    - Buy Prayer Bead (1400 sen) (22/40)
+    - Buy Prayer Bead (1400 sen) (21/40)
     - Buy Possession Balloons
 - Leave prison and grab Heavy Coin Purse
 - Cross bridge, jump in pond, kill Treasure Carp
@@ -231,7 +215,10 @@ These are the quantities you'll need of each material to fully upgrade all prost
     - Memory: Great Shinobi - Owl
     - @key-item Aromatic Branch
 - Talk to Kuro thrice, Emma twice, Kuro thrice, inspect incense burner, eavesdrop behind wall, Save and Quitand talk to Emma twice to get Tomoe's Note, Save and Quit one last time
-- Jump out window, grab Gachiin Sugar, talk to Emma at Tomoe's grave, warp to Dilapidated Temple
+- Jump out window, grab Gachiin Sugar, talk to Emma at Tomoe's grave
+- @miniboss Run down toward Serpent Shrine, fight Lone Shadow Masanaga the Spear-Bearer
+    - Prayer Bead (22/40)
+- Warp to Dilapidated Temple
 
 ### Dilapidated Temple 2
 
