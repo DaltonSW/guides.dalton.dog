@@ -3,6 +3,8 @@ $font-family-base: "Montserrat";
 
 @import "node_modules/bootstrap/scss/bootstrap";
 
+@import "./list-tags.scss";
+
 body {
   padding: 1rem;
 }
@@ -35,6 +37,6 @@ article {
 }
 
 /* When .hide-checked is applied, hide items with checked checkboxes */
-.hide-checked .checklist-item input[type="checkbox"]:checked ~ label {
+.hide-checked .checklist-item input[type="checkbox"]:checked~label {
   display: none;
 }

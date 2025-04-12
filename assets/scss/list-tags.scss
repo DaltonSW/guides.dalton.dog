@@ -1,0 +1,65 @@
+// NerdFont icons
+@import "https://www.nerdfonts.com/assets/css/webfont.css";
+
+@font-face {
+  font-family: 'Symbols Nerd Font Mono';
+  font-style: normal;
+  src: local('Symbols Nerd Font Mono'), url("/fonts/NerdFonts-MonoSymbols.ttf"), format('ttf');
+}
+
+:root {
+  --symbols-font: 'Symbols Nerd Font Mono';
+
+  --boss-symbol: ' ';
+  --campfire-symbol: '󰻝 ';
+  --coin-symbol: ' ';
+  --gem-symbol: ' ';
+  --heart-symbol: ' ';
+  --heart-up-symbol: '󱐮 ';
+  --key-symbol: ' ';
+  --shop-symbol: ' ';
+  --trophy-symbol: ' ';
+  --upgrade-symbol: '󱡧 ';
+}
+
+.boss::before {
+  font-family: var(--symbols-font);
+  content: var(--boss-symbol);
+  color: $red-600;
+}
+
+.miniboss::before {
+  font-family: var(--symbols-font);
+  content: var(--boss-symbol);
+  color: $red-200;
+}
+
+.upgrade::before {
+  font-family: var(--symbols-font);
+  content: var(--upgrade-symbol);
+  color: $blue-300;
+}
+
+.shop::before {
+  font-family: var(--symbols-font);
+  content: var(--coin-symbol);
+  color: $yellow-400;
+}
+
+.bead::before {
+  font-family: var(--symbols-font);
+  content: var(--upgrade-symbol);
+  color: $green-400;
+}
+
+.skill::before {
+  font-family: var(--symbols-font);
+  content: var(--upgrade-symbol);
+  color: $green-400;
+}
+
+.trophy::before {
+  font-family: var(--symbols-font);
+  content: var(--trophy-symbol);
+  color: $yellow-400;
+}

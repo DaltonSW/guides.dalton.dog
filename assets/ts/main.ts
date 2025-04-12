@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
   // Retrieve stored state from localStorage (if any)
   const storedState = localStorage.getItem('checklistState');
   const checklistState: Record<string, boolean> = storedState ? JSON.parse(storedState) : {};
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const checkboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
 
   // Update each checkbox based on stored state
-  checkboxes.forEach(function (checkbox: HTMLInputElement) {
+  checkboxes.forEach(function(checkbox: HTMLInputElement) {
     const id = checkbox.id;
 
     if (checklistState.hasOwnProperty(id)) {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Listen for changes and update state in localStorage
-    checkbox.addEventListener('change', function () {
+    checkbox.addEventListener('change', function() {
       checklistState[id] = checkbox.checked;
       localStorage.setItem('checklistState', JSON.stringify(checklistState));
     });
@@ -92,8 +92,11 @@ function toggleCardBorder(cardId: string) {
   }
 }
 
+window.toggleCardBorder = toggleCardBorder;
+
+
 function toggleCollapseIcon(cardId: string) {
-  const toggleIcon = document.getElementById(cardId + "-card-toggle-icon")
+  const toggleIcon = document.getElementById(cardId + "-card-toggle-icon");
 
   if (!toggleIcon) return;
 
@@ -106,20 +109,4 @@ function toggleCollapseIcon(cardId: string) {
   }
 }
 
-function toggleCollapse(id: string) {
-  var section = document.getElementById(id + "-list");
-  if (section) {
-    if (section.style.display === "none") {
-      section.style.display = "block";
-    } else {
-      section.style.display = "none";
-    }
-  }
-}
-
-function toggleHideChecked() {
-  var checklist = document.querySelector(".checklist");
-  if (checklist) {
-    checklist.classList.toggle("hide-checked");
-  }
-}
+window.toggleCollapseIcon = toggleCollapseIcon;

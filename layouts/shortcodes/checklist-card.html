@@ -6,16 +6,20 @@
 
 {{/* If a header was found, grab it as the title */}}
 {{ if gt (len $matches) 0 }}
-  {{ $title = index $matches 0 }}
-  {{ $title = replaceRE "^## " "" $title }}
-  {{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" .Inner }}
-  {{ $id = urlize $title }}
+{{ $title = index $matches 0 }}
+{{ $title = replaceRE "^## " "" $title }}
+{{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" .Inner }}
+{{ $id = urlize $title }}
 {{ end }}
 
 {{ $lines := split $body "\n" }}
 
 {{ $openList := false }}
 {{ $itemCounter := 0 }}
+{{ $prevIndent := 0 }}
+
+{{ $inSubsection := false }}
+{{ $subID := "" }}
 
 <div class="card w-75 mb-3 border border-danger" data-card-id="{{ $id }}" id="{{ $id }}">
 
@@ -25,8 +29,9 @@
         <span class="badge text-bg-danger" data-progress />
       </h2>
     </div>
-    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" onclick="toggleCollapseIcon('{{ $id }}')"
-            data-bs-target="#{{ $id }}-body" aria-expanded="true" aria-controls="{{ $id }}-body">
+    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse"
+      onclick="toggleCollapseIcon('{{ $id }}')" data-bs-target="#{{ $id }}-body" aria-expanded="true"
+      aria-controls="{{ $id }}-body">
       <i class="bi bi-caret-down-fill" id="{{$id}}-card-toggle-icon"></i>
     </button>
   </div>
@@ -35,41 +40,108 @@
   <div id="{{ $id }}-body" class="collapse show">
     <div class="card-body">
       <ul class="checklist">
-      {{/* Start looping over lines in the block */}}
-        {{ range $index, $line := $lines }}
-          {{ $line = trim $line " " }}
+        {{/* Start looping over lines in the block */}}
+        {{ range $index, $rawLine := $lines }}
+        {{ $line := trim $rawLine " " }}
 
-          {{/* Skip empty lines */}}
-          {{ if eq (len $line) 0 }}{{ continue }}{{ end }}
+        {{/* Skip empty lines */}}
+        {{ if eq (len $line) 0 }}{{ continue }}{{ end }}
 
-          {{ if hasPrefix $line "###" }}
+        {{ if hasPrefix $line "###" }}
+        {{ if $inSubsection }}
+    </div>
+    {{ end }}
 
-            <h3>{{ trim (replace $line "###" "" ) " "}}</h3>
+    {{ $inSubsection = true }}
+    {{ $subHeader := trim (replace $line "###" "" ) " " }}
+    {{ $subID = urlize $subHeader }}
 
-          {{ else }}
+    <div class="d-flex align-items-center">
+      <h3 class="me-3">{{ $subHeader }}</h3>
 
-            {{/* For a regular checklist item: first remove any leading "- " */}}
-            {{ $cleanLine := replaceRE "^-\\s+" "" $line }}
+      <button class="btn btn-sm btn-outline-secondary h-50" type="button" data-bs-toggle="collapse"
+        onclick="toggleCollapseIcon('{{ $id }}-{{$subID}}')" data-bs-target="#{{ $id }}-{{$subID}}-subsection"
+        aria-expanded="true" aria-controls="{{ $id }}-{{$subID}}-subsection">
+        <i class="bi bi-caret-down-fill" id="{{$id}}-{{$subID}}-card-toggle-icon"></i>
+      </button>
+    </div>
+    <div id="{{ $id }}-{{$subID}}-subsection" class="collapse show">
 
-            {{/* Look for a category marker at the beginning of the item (e.g., "[boss] ") */}}
-            {{ $.Scratch.Set "category" "default" }}
-            {{ $matches := findRE "^\\[(\\w+)\\]\\s+" $cleanLine }}
-            {{ if gt (len $matches) 0 }}
-              {{ $.Scratch.Set "category" (index (index $matches 0) 1) }}
-              {{ $cleanLine = replaceRE "^\\[(\\w+)\\]\\s+" "" $cleanLine }}
-            {{ end }}
-            {{ $cat := $.Scratch.Get "category" }}
+      {{ else }}
 
-            {{ $itemCounter = add $itemCounter 1 }}
-            <li class="form-check checklist-item" data-category="{{ $cat }}" id="{{ $id }}-item-{{ $itemCounter }}">
-              <input class="form-check-input" type="checkbox" id="{{ $id }}-checkbox-{{ $itemCounter }}">
-              <label class="form-check-label" for="{{ $id }}-checkbox-{{ $itemCounter }}">{{ $cleanLine }}</label>
-            </li>
+      {{ $spaces := 0}}
+      {{ $matches := findRE "^\\s*" $rawLine }}
+      {{ if gt (len $matches) 0}}
+      {{ $spaces = len (index $matches 0) }}
+      {{ end }}
 
-          {{ end }}   {{/* End header if/else */}}
-        {{ end }}     {{/* End range */}}
-      </ul>           {{/* Close checklist */}}
+      {{ $indent := div $spaces 2 }} {{/* every 2 spaces = one level */}}
+
+      {{/* Open or close lists based on indent level */}}
+      {{ if gt $indent $prevIndent }}
+      {{ range seq $prevIndent (sub $indent 1) }}
+      <ul class="checklist">
+        {{ end }}
+        {{ else if lt $indent $prevIndent }}
+        {{ range seq $indent (sub $prevIndent 1) }}
+        </li>
+      </ul>
+      {{ end }}
+      </li>
+      {{ else if ne $index 0 }}
+      </li>
+      {{ end }}
+
+      {{/* For a regular checklist item: first remove any leading "- " */}}
+      {{ $cleanLine := replaceRE "^-\\s+" "" $line }}
+
+      {{/* Look for a category marker at the beginning of the item (e.g. "@boss") */}}
+      {{ $tagRegex := "\\@[\\w-]+\\s+" }}
+      {{ $category := "default" }}
+      {{ $matches := findRE $tagRegex $cleanLine }}
+      {{ if gt (len $matches) 0 }}
+      {{ $category = replaceRE "\\@" "" (index $matches 0) }}
+      {{ $cleanLine = replaceRE $tagRegex "" $cleanLine }}
+      {{ end }}
+
+      {{ $itemCounter = add $itemCounter 1 }}
+      <li class="form-check checklist-item" data-category="{{ $category }}" id="{{ $id }}-item-{{ $itemCounter }}">
+        <input class="form-check-input" type="checkbox" id="{{ $id }}-checkbox-{{ $itemCounter }}">
+        <label class="form-check-label {{ $category }}" for="{{ $id }}-checkbox-{{ $itemCounter }}">{{ $cleanLine
+          }}</label>
+      </li>
+
+      {{ $prevIndent = $indent }}
+
+      {{ end }} {{/* End header if/else */}}
+      {{ end }} {{/* End range */}}
+      </ul> {{/* Close checklist */}}
 
     </div>
   </div>
 </div>
+
+<script>
+  function applyChecklistLabelStyles() {
+    document.querySelectorAll('.form-check-input').forEach(checkbox => {
+      const label = document.querySelector(`label[for="${checkbox.id}"]`);
+      if (!label) return;
+
+      if (checkbox.checked) {
+        label.classList.add('text-muted', 'text-decoration-line-through');
+      } else {
+        label.classList.remove('text-muted', 'text-decoration-line-through');
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // initial hook-up
+    document.querySelectorAll('.form-check-input').forEach(checkbox => {
+      checkbox.addEventListener('change', applyChecklistLabelStyles);
+    });
+
+    // defer this so your persistence code has time to run first
+    setTimeout(applyChecklistLabelStyles, 0);
+  });
+</script>
