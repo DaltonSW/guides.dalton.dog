@@ -45,16 +45,16 @@ draft: false
 
 ## World 3 (Vanilla Dome)
 
-- Vanilla Dome 1 Giant Gate
-- Vanilla Dome 1 Secret Exit
-- Vanilla Dome 2 Giant Gate
-- Vanilla Dome 2 Secret Exit
+- Vanilla Dome 1 (Gate)
+- Vanilla Dome 1 (Secret)
+- Vanilla Dome 2 (Gate)
+- Vanilla Dome 2 (Secret)
 - Red Switch Palace
 - Vanilla Ghost House
 - Vanilla Dome 3
 - Vanilla Dome 4
-- Vanilla Secret 1 Giant Gate
-- Vanilla Secret 1 Secret Exit
+- Vanilla Secret 1 (Gate)
+- Vanilla Secret 1 (Secret)
 - Vanilla Secret 2
 - Vanilla Secret 3
 - Vanilla Fortress
@@ -66,8 +66,8 @@ draft: false
 
 ## World 4 (Twin Bridges)
 
-- Cheese Bridge Area Giant Gate
-- Cheese Bridge Area Secret Exit
+- Cheese Bridge Area (Gate)
+- Cheese Bridge Area (Secret)
 - Soda Lake
 - Cookie Mountain
 - Butter Bridge 1
@@ -80,17 +80,17 @@ draft: false
 
 ## World 5 (Forest of Illusion)
 
-- Forest of Illusion 1 Giant Gate
-- Forest of Illusion 1 Secret Exit
-- Forest of Illusion 2 Giant Gate
-- Forest of Illusion 2 Secret Exit
-- Forest of Illusion 3 Giant Gate
-- Forest of Illusion 3 Secret Exit
-- Forest of Illusion 4 Giant Gate
-- Forest of Illusion 4 Secret Exit
+- Forest of Illusion 1 (Gate)
+- Forest of Illusion 1 (Secret)
+- Forest of Illusion 2 (Gate)
+- Forest of Illusion 2 (Secret)
+- Forest of Illusion 3 (Gate)
+- Forest of Illusion 3 (Secret)
+- Forest of Illusion 4 (Gate)
+- Forest of Illusion 4 (Secret)
 - Blue Switch Palace
-- Forest Ghost House Giant Gate
-- Forest Ghost House Secret Exit
+- Forest Ghost House (Gate)
+- Forest Ghost House (Secret)
 - Forest Secret Area
 - Forest Fortress
 - Castle #5 - Roy
@@ -103,10 +103,10 @@ draft: false
 
 - Chocolate Island 1
 - Choco-Ghost House
-- Chocolate Island 2 Giant Gate
-- Chocolate Island 2 Secret Exit
-- Chocolate Island 3 Giant Gate
-- Chocolate Island 3 Secret Exit
+- Chocolate Island 2 (Gate)
+- Chocolate Island 2 (Secret)
+- Chocolate Island 3 (Gate)
+- Chocolate Island 3 (Secret)
 - Chocolate Fortress
 - Chocolate Island 4
 - Chocolate Island 5
@@ -121,13 +121,13 @@ draft: false
 
 - Sunken Ghost Ship
 - Valley of Bowser 1
-- Valley of Bowser 2 Giant Gate
-- Valley of Bowser 2 Secret Exit
-- Valley Ghost House Giant Gate
-- Valley Ghost House Secret Exit
+- Valley of Bowser 2 (Gate)
+- Valley of Bowser 2 (Secret)
+- Valley Ghost House (Gate)
+- Valley Ghost House (Secret)
 - Valley of Bowser 3
-- Valley of Bowser 4 Giant Gate
-- Valley of Bowser 4 Secret Exit
+- Valley of Bowser 4 (Gate)
+- Valley of Bowser 4 (Secret)
 - Valley Fortress
 - Castle #7 - Larry
 
@@ -137,16 +137,16 @@ draft: false
 
 ## Star World
 
-- Star World 1 Giant Gate
-- Star World 1 Secret Exit
-- Star World 2 Giant Gate
-- Star World 2 Secret Exit
-- Star World 3 Giant Gate
-- Star World 3 Secret Exit
-- Star World 4 Giant Gate
-- Star World 4 Secret Exit
-- Star World 5 Giant Gate
-- Star World 5 Secret Exit
+- Star World 1 (Gate)
+- Star World 1 (Secret)
+- Star World 2 (Gate)
+- Star World 2 (Secret)
+- Star World 3 (Gate)
+- Star World 3 (Secret)
+- Star World 4 (Gate)
+- Star World 4 (Secret)
+- Star World 5 (Gate)
+- Star World 5 (Secret)
 
 {{< /checklist-card >}}
 
