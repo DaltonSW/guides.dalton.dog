@@ -235,7 +235,8 @@ These are the quantities you'll need of each material to fully upgrade all prost
     - @key-item Dragon's Tally Board
 - Dive underwater, grab 3 Treasure Carp Scales, head into Carp's cave
 - Sit at Palace Ground's idol
-    - Use Memory of True Monk
+- Grab Gourd Seed (9/9) from chest
+    - @trophy Achievement: Ultimate Healing Gourd
 - @miniboss Get up, open door, go kill Okami Leader Shizu
     - Prayer Bead (23/40)
 - Grab Bulging Coin Purse on the tree branch
@@ -245,7 +246,6 @@ These are the quantities you'll need of each material to fully upgrade all prost
     - Yashariku's Spiritfall 
 - Grab 2 Treasure Carp Scales and Prayer Bead (24/40) from base of statue
 - Warp back to Palace Ground's idol
-- Grab Gourd Seed (9/9) from chest
 - Go to Pot Man and buy 2 Lapis Lazuli (2/10) (6 Scales each)
 - Keep talking to him to get Truly Precious Bait
 - Head toward Sakura Bull, making sure to get Carp to destroy the bridge
@@ -275,16 +275,6 @@ These are the quantities you'll need of each material to fully upgrade all prost
     - Prayer Bead (26/40)
 - Grab Fulminated Mercury
 - Grab Fulminated Mercury and Lump of Grave Wax, enter Demon of Hatred arena
-- Sit at idol
-    - Acquire Skills
-        - @skill Breath of Life: Light
-        - @skill Chasing Slice
-        - @skill Mid-air Prosthetic Tool
-        - @skill Sculptor's Karma: Scars
-        - @skill Sculptor's Karma: Blood
-        - @skill Ichimonji
-        - @skill Descending Carp
-        - @skill Ascending Carp
 - @boss Demon of Hatred
     - @trophy Achievement: Demon of Hatred
     - Memory: Demon of Hatred
