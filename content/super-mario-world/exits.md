@@ -1,7 +1,7 @@
 ---
 menus:
-- main:
--     parent: Super Mario World
+  main:
+    parent: Super Mario World
 title: Exits
 draft: false
 ---
