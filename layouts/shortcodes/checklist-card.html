@@ -25,8 +25,11 @@
 
   <div class="card-header d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center flex-grow-1">
-      <h2 class="mb-0 ms-2">{{ $title }}
+      <h2 class="mb-0 me-2">
         <span class="badge text-bg-danger" data-progress />
+      </h2>
+      <h2 class="mb-0 ms-2">
+        {{- $title -}}
       </h2>
     </div>
     <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse"
@@ -72,7 +75,7 @@
       {{ $spaces := 0}}
       {{ $matches := findRE "^\\s*" $rawLine }}
       {{ if gt (len $matches) 0}}
-      {{ $spaces = len (index $matches 0) }}
+        {{ $spaces = len (index $matches 0) }}
       {{ end }}
 
       {{ $indent := div $spaces 2 }} {{/* every 2 spaces = one level */}}

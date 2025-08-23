@@ -1,49 +1,136 @@
+{{/* Use a regex to match a markdown H2 header (## Title) on its own line */}}
+{{ $matches := findRE "(?m)^##\\s+.*" .Inner }}
+{{ $title := "" }}
+{{ $id := "" }}
+{{ $body := .Inner }}
+
+{{/* If a header was found, grab it as the title */}}
+{{ if gt (len $matches) 0 }}
+{{ $title = index $matches 0 }}
+{{ $title = replaceRE "^## " "" $title }}
+{{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" .Inner }}
+{{ $id = urlize $title }}
+{{ else }}
+{{ $id = md5 .Inner }}
+{{ end }}
+
+{{/* Shortcode logic for parsing the table and counting items */}}
+{{- $totalItems := 0 -}}
+{{- $lines := split $body "\n" -}}
 {{- $headerLine := "" -}}
-{{- $lines := split .Inner "\n" -}}
 {{- range $i, $line := $lines -}}
   {{- if hasPrefix $line "|" -}}
     {{- $headerLine = $line -}}
-    {{- $lines = after $i $lines -}}
     {{- break -}}
   {{- end -}}
 {{- end -}}
 
-<div class="checkbox-table-container">
-{{- $lines := split .Inner "\n" -}}
-<table>
-  <thead>
-    <tr>
-      {{- range $i, $headerLine := $lines -}}
-        {{- if and (ne $i 0) (hasPrefix $headerLine "|") -}}
-          {{- $headers := split $headerLine "|" -}}
-          {{- range $j, $header := $headers -}}
-            {{- if and (ne $j 0) (ne $j (sub (len $headers) 1)) -}}
-              <th>{{- trim $header " " -}}</th>
-            {{- end -}}
-          {{- end -}}
-          <th>?</th>
-          {{- $lines = after $i $lines -}}
-          {{- break -}}
-        {{- end -}}
-      {{- end -}}
-    </tr>
-  </thead>
-  <tbody>
-    {{- range $i, $line := $lines -}}
-      {{- if and (ne $i 0) (hasPrefix $line "|") -}}
-        {{- if not (hasPrefix $line "| --") -}}
-          <tr>
-            {{- $cells := split $line "|" -}}
-            {{- range $j, $cell := $cells -}}
-              {{- if and (ne $j 0) (ne $j (sub (len $cells) 1)) -}}
-                <td>{{- markdownify (trim $cell " ") -}}</td>
+<div class="card w-75 mb-3 border border-danger" data-card-id="{{ $id }}" id="{{ $id }}">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center flex-grow-1">
+      <h2 class="mb-0 me-2">
+        <span class="badge text-bg-danger" data-progress />
+      </h2>
+      <h2 class="mb-0 ms-2">
+        {{- $title -}}
+      </h2>
+    </div>
+    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse"
+      onclick="toggleCollapseIcon('{{ $id }}')" data-bs-target="#{{ $id }}-body" aria-expanded="true"
+      aria-controls="{{ $id }}-body">
+      <i class="bi bi-caret-down-fill" id="{{$id}}-card-toggle-icon"></i>
+    </button>
+  </div>
+  <div id="{{ $id }}-body" class="collapse show">
+    <div class="card-body">
+      {{ if $headerLine }}
+        <table class="table table-sm table-hover">
+          <thead>
+            <tr>
+              <th>?</th>
+              {{- $headers := split $headerLine "|" -}}
+              {{- range $j, $header := $headers -}}
+                {{- if and (ne $j 0) (ne $j (sub (len $headers) 1)) -}}
+                  <th>{{- trim $header " " -}}</th>
+                {{- end -}}
+              {{- end -}}
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            {{- range $i, $line := $lines -}}
+              {{- if hasPrefix $line "|" -}}
+                {{- if not (hasPrefix $line "| --") -}}
+                  {{- if ne $line $headerLine -}}
+                    {{- $totalItems = add $totalItems 1 -}}
+                    <tr>
+                      <td>
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="{{ $id }}-checkbox-{{ $totalItems }}">
+                          <label class="form-check-label" for="{{ $id }}-checkbox-{{ $totalItems }}"></label>
+                        </div>
+                      </td>
+                      {{- $cells := split $line "|" -}}
+                      {{- range $j, $cell := $cells -}}
+                        {{- if and (ne $j 0) (ne $j (sub (len $cells) 1)) -}}
+                          <td>{{- markdownify (trim $cell " ") -}}</td>
+                        {{- end -}}
+                      {{- end -}}
+                    </tr>
+                  {{- end -}}
+                {{- end -}}
               {{- end -}}
             {{- end -}}
-            <td><input type="checkbox"></td>
-          </tr>
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
-  </tbody>
-</table>
+          </tbody>
+        </table>
+      {{ else }}
+        <p>No table found within the shortcode.</p>
+      {{ end }}
+    </div>
+  </div>
 </div>
+
+<script>
+  function updateCardProgress(cardId) {
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    const checkboxes = card.querySelectorAll('input[type="checkbox"]');
+    if (checkboxes.length === 0) return;
+    
+    const totalItems = checkboxes.length;
+    const checkedItems = card.querySelectorAll('input[type="checkbox"]:checked').length;
+    const progressText = `${checkedItems} / ${totalItems}`;
+    
+    const progressBadge = card.querySelector('[data-progress]');
+    if (progressBadge) {
+        progressBadge.textContent = progressText;
+    }
+  }
+
+  function toggleCollapseIcon(cardId) {
+    const icon = document.getElementById(cardId + '-card-toggle-icon');
+    if (!icon) return;
+    if (icon.classList.contains('bi-caret-down-fill')) {
+      icon.classList.remove('bi-caret-down-fill');
+      icon.classList.add('bi-caret-right-fill');
+    } else {
+      icon.classList.remove('bi-caret-right-fill');
+      icon.classList.add('bi-caret-down-fill');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.card[data-card-id]').forEach(card => {
+      const cardId = card.getAttribute('data-card-id');
+      const checkboxes = card.querySelectorAll('input[type="checkbox"]');
+      
+      checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+          updateCardProgress(cardId);
+        });
+      });
+      
+      // Initial progress update
+      updateCardProgress(cardId);
+    });
+  });
+</script>
