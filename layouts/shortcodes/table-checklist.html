@@ -1,0 +1,49 @@
+{{- $headerLine := "" -}}
+{{- $lines := split .Inner "\n" -}}
+{{- range $i, $line := $lines -}}
+  {{- if hasPrefix $line "|" -}}
+    {{- $headerLine = $line -}}
+    {{- $lines = after $i $lines -}}
+    {{- break -}}
+  {{- end -}}
+{{- end -}}
+
+<div class="checkbox-table-container">
+{{- $lines := split .Inner "\n" -}}
+<table>
+  <thead>
+    <tr>
+      {{- range $i, $headerLine := $lines -}}
+        {{- if and (ne $i 0) (hasPrefix $headerLine "|") -}}
+          {{- $headers := split $headerLine "|" -}}
+          {{- range $j, $header := $headers -}}
+            {{- if and (ne $j 0) (ne $j (sub (len $headers) 1)) -}}
+              <th>{{- trim $header " " -}}</th>
+            {{- end -}}
+          {{- end -}}
+          <th>?</th>
+          {{- $lines = after $i $lines -}}
+          {{- break -}}
+        {{- end -}}
+      {{- end -}}
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $i, $line := $lines -}}
+      {{- if and (ne $i 0) (hasPrefix $line "|") -}}
+        {{- if not (hasPrefix $line "| --") -}}
+          <tr>
+            {{- $cells := split $line "|" -}}
+            {{- range $j, $cell := $cells -}}
+              {{- if and (ne $j 0) (ne $j (sub (len $cells) 1)) -}}
+                <td>{{- markdownify (trim $cell " ") -}}</td>
+              {{- end -}}
+            {{- end -}}
+            <td><input type="checkbox"></td>
+          </tr>
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  </tbody>
+</table>
+</div>
