@@ -6,6 +6,8 @@ title: Exits
 draft: false
 ---
 
+{{< page-checkbox-count >}}
+
 {{< checklist-card >}}
 
 ## World 1 (Yoshi's Island)

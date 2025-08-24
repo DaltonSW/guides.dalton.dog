@@ -6,6 +6,8 @@ title: Badges
 draft: true
 ---
 
+{{< page-checkbox-count >}}
+
 {{< table-checklist >}}
 
 ## Prologue / Chapter 1

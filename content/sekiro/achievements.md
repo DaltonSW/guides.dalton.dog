@@ -6,6 +6,8 @@ title: Achievements
 draft: false
 ---
 
+{{< page-checkbox-count >}}
+
 {{< card checkable=true >}}
 
 ## Sekiro

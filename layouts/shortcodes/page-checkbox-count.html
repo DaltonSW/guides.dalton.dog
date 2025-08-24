@@ -1,0 +1,26 @@
+<div class="d-flex align-items-center flex-grow-1 mb-3">
+    <h2>
+        Total Progress:
+    </h2>
+    <h2 class="ms-2">
+        <span id="page-checkbox-counter" class="badge text-bg-danger" />
+    </h2>
+</div>
+
+<script>
+    function updatePageProgress() {
+        const totalCheckboxes = document.querySelectorAll('input[type="checkbox"]').length;
+        const checkedCheckboxes = document.querySelectorAll('input[type="checkbox"]:checked').length;
+        const progressElement = document.getElementById('page-checkbox-counter');
+        if (progressElement) {
+            progressElement.textContent = `${checkedCheckboxes} / ${totalCheckboxes}`;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', updatePageProgress);
+    document.addEventListener('change', (event) => {
+        if (event.target.matches('input[type="checkbox"]')) {
+            updatePageProgress();
+        }
+    });
+</script>
