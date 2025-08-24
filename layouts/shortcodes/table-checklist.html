@@ -55,7 +55,7 @@
             <table class="table table-sm table-hover">
               <thead>
                 <tr>
-                  <th>?</th>
+                  <th style="width: 5%">?</th>
                   {{ $headers := split $trimmedLine "|" }}
                   {{ range $j, $header := $headers }}
                     {{ if and (ne $j 0) (ne $j (sub (len $headers) 1)) }}
