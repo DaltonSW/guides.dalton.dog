@@ -18,7 +18,7 @@
   <div class="card-header d-flex align-items-center justify-content-between">
     <div class="d-flex align-items-center flex-grow-1">
       <h2 class="mb-0 me-2">
-        <span class="badge text-bg-danger" data-progress />
+        <span class="badge text-bg-danger " data-progress />
       </h2>
       <h2 class="mb-0 ms-2">
         {{- $title -}}
@@ -104,7 +104,7 @@
     
     const totalItems = checkboxes.length;
     const checkedItems = card.querySelectorAll('input[type="checkbox"]:checked').length;
-    const progressText = `${checkedItems} / ${totalItems}`;
+    const progressText = `${checkedItems}/${totalItems}`;
     
     const progressBadge = card.querySelector('[data-progress]');
     if (progressBadge) {

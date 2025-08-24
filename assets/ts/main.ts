@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Retrieve stored state from localStorage (if any)
   const storedState = localStorage.getItem('checklistState');
   const checklistState: Record<string, boolean> = storedState ? JSON.parse(storedState) : {};
@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const checkboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
 
   // Update each checkbox based on stored state
-  checkboxes.forEach(function(checkbox: HTMLInputElement) {
+  checkboxes.forEach(function (checkbox: HTMLInputElement) {
     const id = checkbox.id;
 
     if (checklistState.hasOwnProperty(id)) {
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Listen for changes and update state in localStorage
-    checkbox.addEventListener('change', function() {
+    checkbox.addEventListener('change', function () {
       checklistState[id] = checkbox.checked;
       localStorage.setItem('checklistState', JSON.stringify(checklistState));
     });
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const updateProgress = () => {
       const checked = Array.from(checkboxes).filter(cb => cb.checked).length;
-      label.textContent = `${checked} / ${checkboxes.length}`;
+      label.textContent = `${checked}/${checkboxes.length}`;
 
       if (`${checked}` === `${checkboxes.length}`) {
         label.classList.remove("text-bg-danger");
