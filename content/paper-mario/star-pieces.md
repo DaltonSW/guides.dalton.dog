@@ -3,7 +3,6 @@ menus:
     main:
         parent: Paper Mario 64
 title: Star Pieces
-draft: true
 ---
 
 {{< page-checkbox-count >}}
