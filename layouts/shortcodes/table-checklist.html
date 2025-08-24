@@ -4,26 +4,15 @@
 {{ $id := "" }}
 {{ $body := .Inner }}
 
-{{/* If a header was found, grab it as the title */}}
+{{/* If a header was found, grab it as the title and set the ID */}}
 {{ if gt (len $matches) 0 }}
-{{ $title = index $matches 0 }}
-{{ $title = replaceRE "^## " "" $title }}
-{{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" .Inner }}
-{{ $id = urlize $title }}
+  {{ $title = index $matches 0 }}
+  {{ $title = replaceRE "^## " "" $title }}
+  {{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" .Inner }}
+  {{ $id = urlize $title }}
 {{ else }}
-{{ $id = md5 .Inner }}
+  {{ $id = md5 .Inner }}
 {{ end }}
-
-{{/* Shortcode logic for parsing the table and counting items */}}
-{{- $totalItems := 0 -}}
-{{- $lines := split $body "\n" -}}
-{{- $headerLine := "" -}}
-{{- range $i, $line := $lines -}}
-  {{- if hasPrefix $line "|" -}}
-    {{- $headerLine = $line -}}
-    {{- break -}}
-  {{- end -}}
-{{- end -}}
 
 <div class="card w-75 mb-3 border border-danger" data-card-id="{{ $id }}" id="{{ $id }}">
   <div class="card-header d-flex align-items-center justify-content-between">
@@ -41,49 +30,66 @@
       <i class="bi bi-caret-down-fill" id="{{$id}}-card-toggle-icon"></i>
     </button>
   </div>
+
   <div id="{{ $id }}-body" class="collapse show">
     <div class="card-body">
-      {{ if $headerLine }}
-        <table class="table table-sm table-hover">
-          <thead>
+      {{ $lines := split $body "\n" }}
+      {{ $inTable := false }}
+      {{ $itemCounter := 0 }}
+
+      {{ range $i, $line := $lines }}
+        {{ $trimmedLine := trim $line " " }}
+
+        {{ if hasPrefix $trimmedLine "###" }}
+          {{/* If we were in a table, close it before adding the header */}}
+          {{ if $inTable }}
+            </tbody>
+            </table>
+            {{ $inTable = false }}
+          {{ end }}
+          {{/* Render the H3 header as a sub-heading */}}
+          <h3 class="d-flex justify-content-center">{{ replaceRE "^###\\s*" "" $trimmedLine }}</h3>
+        {{ else if hasPrefix $trimmedLine "|" }}
+          {{/* If we are not in a table yet, this must be the table header */}}
+          {{ if not $inTable }}
+            <table class="table table-sm table-hover">
+              <thead>
+                <tr>
+                  <th>?</th>
+                  {{ $headers := split $trimmedLine "|" }}
+                  {{ range $j, $header := $headers }}
+                    {{ if and (ne $j 0) (ne $j (sub (len $headers) 1)) }}
+                      <th>{{ trim $header " " }}</th>
+                    {{ end }}
+                  {{ end }}
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+              {{ $inTable = true }}
+          {{ else if not (hasPrefix $trimmedLine "| --") }}
+            {{/* This is a data row, render it with a checkbox */}}
+            {{ $itemCounter = add $itemCounter 1 }}
             <tr>
-              <th>?</th>
-              {{- $headers := split $headerLine "|" -}}
-              {{- range $j, $header := $headers -}}
-                {{- if and (ne $j 0) (ne $j (sub (len $headers) 1)) -}}
-                  <th>{{- trim $header " " -}}</th>
-                {{- end -}}
-              {{- end -}}
+              <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="{{ $id }}-checkbox-{{ $itemCounter }}">
+                  <label class="form-check-label" for="{{ $id }}-checkbox-{{ $itemCounter }}"></label>
+                </div>
+              </td>
+              {{ $cells := split $trimmedLine "|" }}
+              {{ range $j, $cell := $cells }}
+                {{ if and (ne $j 0) (ne $j (sub (len $cells) 1)) }}
+                  <td>{{ markdownify (trim $cell " ") }}</td>
+                {{ end }}
+              {{ end }}
             </tr>
-          </thead>
-          <tbody class="table-group-divider">
-            {{- range $i, $line := $lines -}}
-              {{- if hasPrefix $line "|" -}}
-                {{- if not (hasPrefix $line "| --") -}}
-                  {{- if ne $line $headerLine -}}
-                    {{- $totalItems = add $totalItems 1 -}}
-                    <tr>
-                      <td>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="{{ $id }}-checkbox-{{ $totalItems }}">
-                          <label class="form-check-label" for="{{ $id }}-checkbox-{{ $totalItems }}"></label>
-                        </div>
-                      </td>
-                      {{- $cells := split $line "|" -}}
-                      {{- range $j, $cell := $cells -}}
-                        {{- if and (ne $j 0) (ne $j (sub (len $cells) 1)) -}}
-                          <td>{{- markdownify (trim $cell " ") -}}</td>
-                        {{- end -}}
-                      {{- end -}}
-                    </tr>
-                  {{- end -}}
-                {{- end -}}
-              {{- end -}}
-            {{- end -}}
-          </tbody>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+      {{/* Close the last table if we were still in one */}}
+      {{ if $inTable }}
+        </tbody>
         </table>
-      {{ else }}
-        <p>No table found within the shortcode.</p>
       {{ end }}
     </div>
   </div>
@@ -102,7 +108,7 @@
     
     const progressBadge = card.querySelector('[data-progress]');
     if (progressBadge) {
-        progressBadge.textContent = progressText;
+      progressBadge.textContent = progressText;
     }
   }
 
@@ -129,7 +135,6 @@
         });
       });
       
-      // Initial progress update
       updateCardProgress(cardId);
     });
   });
