@@ -66,7 +66,7 @@
               </thead>
               <tbody class="table-group-divider">
               {{ $inTable = true }}
-          {{ else if not (hasPrefix $trimmedLine "| --") }}
+          {{ else if (and (not (hasPrefix $trimmedLine "| --")) (not (hasPrefix $trimmedLine "|---"))) }}
             {{/* This is a data row, render it with a checkbox */}}
             {{ $itemCounter = add $itemCounter 1 }}
             <tr>
