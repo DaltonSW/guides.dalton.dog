@@ -2,6 +2,7 @@
 menus:
     main:
         parent: Sekiro
+        identifier: "sekiro_checklists"
 title: Checklists
 draft: false
 ---

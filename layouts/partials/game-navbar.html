@@ -10,7 +10,7 @@
   {{ range .CurrentSection.Pages }}
     <li class="nav-item">
       <a class="nav-link {{ if eq .Permalink $.Permalink }}active{{ end }}" href="{{ .Permalink }}">
-        {{ .Title }}
+        [ {{ .Title }} ]
       </a>
     </li>
   {{ end }}
@@ -18,7 +18,7 @@
   {{ range .Pages }}
     <li class="nav-item">
       <a class="nav-link {{ if eq .Permalink $.Permalink }}active{{ end }}" href="{{ .Permalink }}">
-        {{ .Title }}
+        [ {{ .Title }} ]
       </a>
     </li>
   {{ end }}
