@@ -1,13 +1,12 @@
 {{ define "main" }}
 <main>
   <h1>Welcome to {{ .Site.Title }}</h1>
-  <section class="posts d-flex flex-column align-items-center">
+  <section>
+    <ul>
     {{ range .Pages }}
-      <article>
-        <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-        <p>{{ .Summary }}</p>
-      </article>
+        <li><h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2></li>
     {{ end }}
+    </ul>
   </section>
 </main>
 {{ end }}

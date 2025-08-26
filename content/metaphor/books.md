@@ -9,7 +9,7 @@ title: Books
 {{< table-checklist >}}
 
 
-| Book                        | How to Obtain                                      |
+| Book                            | How to Obtain                                          |
 | ------------------------------- | ------------------------------------------------------ |
 | New World Travel Diary          | Unlocks automatically on 06/24                         |
 | Pride and Persuasion            | Unlocks automatically on 06/24                         |
