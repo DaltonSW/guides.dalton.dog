@@ -16,7 +16,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-        {{- if $page.IsHome }}
         <!-- Game Selection Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -28,7 +27,7 @@
             {{- end }}
           </ul>
         </li>
-        {{- else }}
+        {{- if not $page.IsHome }}
           {{- partial "game-navbar.html" $page }}
         {{- end }}
 
