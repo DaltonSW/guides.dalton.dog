@@ -123,28 +123,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  function applyChecklistLabelStyles() {
-    document.querySelectorAll('.form-check-input').forEach(checkbox => {
-      const label = document.querySelector(`label[for="${checkbox.id}"]`);
-      if (!label) return;
-
-      if (checkbox.checked) {
-        label.classList.add('text-muted', 'text-decoration-line-through');
-      } else {
-        label.classList.remove('text-muted', 'text-decoration-line-through');
-      }
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', () => {
-    // initial hook-up
-    document.querySelectorAll('.form-check-input').forEach(checkbox => {
-      checkbox.addEventListener('change', applyChecklistLabelStyles);
-    });
-
-    // defer this so your persistence code has time to run first
-    setTimeout(applyChecklistLabelStyles, 0);
-  });
-</script>
