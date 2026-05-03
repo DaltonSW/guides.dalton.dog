@@ -1,33 +1,11 @@
-{{/* Use a regex to match a markdown H2 header (## Title) on its own line */}}
-{{ $matches := findRE "(?m)^##\\s+.*" .Inner }}
-{{ $title := "" }}
-{{ $id := "" }}
-{{ $body := .Inner }}
-
-{{/* If a header was found, grab it as the title */}}
-{{ if gt (len $matches) 0 }}
-  {{ $title = index $matches 0 }}
-  {{ $title = replaceRE "^## " "" $title }}
-  {{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" .Inner }}
-  {{ $id = urlize $title }}
-{{ end }}
+{{ $parsed := partial "extract-title" .Inner }}
+{{ $title := $parsed.title }}
+{{ $id := $parsed.id }}
+{{ $body := $parsed.body }}
 
 {{ $checkable := or (.Get "checkable") false }}
 
-<div class="card w-75 mb-3 border border-danger" id="{{ $id }}">
-  <div class="card-header d-flex align-items-center justify-content-between">
-    {{ if $checkable }}
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="{{ $id }}-check"
-             onchange="toggleCardBorder('{{ $id }}')">
-      </div>
-    {{ end }}
-    <h3 class="mb-0 flex-grow-1 ms-2">{{ $title }}</h3>
-    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" onclick="toggleCollapseIcon('{{ $id }}')"
-            data-bs-target="#{{ $id }}-body" aria-expanded="true" aria-controls="{{ $id }}-body">
-      <i class="bi bi-caret-down-fill" id="{{$id}}-card-toggle-icon"></i>
-    </button>
-  </div>
+{{ partial "card-header" (dict "id" $id "title" $title "checkable" $checkable) | safeHTML }}
 
   {{/* For some reason, using a wrapper div for the collapsing thing makes the animation way smoother */}}
   <div id="{{ $id }}-body" class="collapse show">

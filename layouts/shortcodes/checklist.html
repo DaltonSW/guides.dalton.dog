@@ -1,20 +1,12 @@
-{{/* Use a regex to match a markdown H2 header (## Title) on its own line */}}
-{{ $matches := findRE "(?m)^##\\s+.*" .Inner }}
-{{ $title := "" }}
-{{ $id := "" }}
-{{ $body := .Inner }}
+{{ $parsed := partial "extract-title" .Inner }}
+{{ $title := $parsed.title }}
+{{ $id := $parsed.id }}
+{{ $body := $parsed.body }}
 
-{{/* If a header was found, grab it as the title */}}
-{{ if gt (len $matches) 0 }}
-  {{ $title = index $matches 0 }}
-  {{ $title = replaceRE "^## " "" $title }}
-  {{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" .Inner }}
-  {{ $id = urlize $title }}
-{{ end }}
 {{ $openList := false }}
 {{ $itemCounter := 0 }}
 
-{{ $trimmed := trim .Inner "\n" }}
+{{ $trimmed := trim $body "\n" }}
 {{ $lines := split $trimmed "\n" }}
 
 <ul class="checklist">

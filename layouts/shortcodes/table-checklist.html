@@ -1,35 +1,13 @@
-{{/* Use a regex to match a markdown H2 header (## Title) on its own line */}}
-{{ $matches := findRE "(?m)^##\\s+.*" .Inner }}
-{{ $title := "" }}
-{{ $id := "" }}
-{{ $body := .Inner }}
+{{ $parsed := partial "extract-title" .Inner }}
+{{ $title := $parsed.title }}
+{{ $id := $parsed.id }}
+{{ $body := $parsed.body }}
 
-{{/* If a header was found, grab it as the title and set the ID */}}
-{{ if gt (len $matches) 0 }}
-  {{ $title = index $matches 0 }}
-  {{ $title = replaceRE "^## " "" $title }}
-  {{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" .Inner }}
-  {{ $id = urlize $title }}
-{{ else }}
+{{ if eq $id "" }}
   {{ $id = md5 .Inner }}
 {{ end }}
 
-<div class="card w-100 mb-3 border border-danger" data-card-id="{{ $id }}" id="{{ $id }}">
-  <div class="card-header d-flex align-items-center justify-content-between">
-    <div class="d-flex align-items-center flex-grow-1">
-      <h2 class="mb-0 me-2">
-        <span class="badge text-bg-danger " data-progress />
-      </h2>
-      <h2 class="mb-0 ms-2">
-        {{- $title -}}
-      </h2>
-    </div>
-    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse"
-      onclick="toggleCollapseIcon('{{ $id }}')" data-bs-target="#{{ $id }}-body" aria-expanded="true"
-      aria-controls="{{ $id }}-body">
-      <i class="bi bi-caret-down-fill" id="{{$id}}-card-toggle-icon"></i>
-    </button>
-  </div>
+{{ partial "card-header" (dict "id" $id "title" $title "width" "w-100" "progress" true) | safeHTML }}
 
   <div id="{{ $id }}-body" class="collapse show">
     <div class="card-body">
