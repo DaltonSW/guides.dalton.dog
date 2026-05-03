@@ -1,6 +1,6 @@
 <!-- Home Button -->
 <li class="nav-item">
-  <a class="nav-link {{ if eq .CurrentSection.Permalink $.Permalink }}active{{ end }}" href="{{ .CurrentSection.Permalink }}">
+  <a class="nav-link {{ if eq .CurrentSection.RelPermalink $.RelPermalink }}active{{ end }}" href="{{ .CurrentSection.RelPermalink }}">
         {{ .CurrentSection.Title }} Home
   </a>
 </li>
@@ -9,7 +9,7 @@
 {{ if .Section }}
   {{ range .CurrentSection.Pages }}
     <li class="nav-item">
-      <a class="nav-link {{ if eq .Permalink $.Permalink }}active{{ end }}" href="{{ .Permalink }}">
+      <a class="nav-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" href="{{ .RelPermalink }}">
         [ {{ .Title }} ]
       </a>
     </li>
@@ -17,7 +17,7 @@
 {{ else }}
   {{ range .Pages }}
     <li class="nav-item">
-      <a class="nav-link {{ if eq .Permalink $.Permalink }}active{{ end }}" href="{{ .Permalink }}">
+      <a class="nav-link {{ if eq .RelPermalink $.RelPermalink }}active{{ end }}" href="{{ .RelPermalink }}">
         [ {{ .Title }} ]
       </a>
     </li>
