@@ -1,0 +1,40 @@
+{{/* card-header: Renders a collapsible card header with optional progress badge or checkbox.
+     Parameters (passed as dict):
+       .id        - card ID (required)
+       .title     - display title (required)
+       .width     - Bootstrap width class, e.g. "w-75" or "w-100" (default: "w-75")
+       .progress  - show progress badge (default: false)
+       .checkable - show single checkbox in header (default: false)
+*/}}
+{{ $id := .id }}
+{{ $title := .title }}
+{{ $width := default "w-75" .width }}
+{{ $progress := default false .progress }}
+{{ $checkable := default false .checkable }}
+
+<div class="card {{ $width }} mb-3 border border-danger" {{ if $progress }}data-card-id="{{ $id }}"{{ end }} id="{{ $id }}">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    {{ if $checkable }}
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="{{ $id }}-check"
+             onchange="toggleCardBorder('{{ $id }}')">
+      </div>
+    {{ end }}
+    <div class="d-flex align-items-center flex-grow-1">
+      {{ if $progress }}
+      <h2 class="mb-0 me-2">
+        <span class="badge text-bg-danger" data-progress />
+      </h2>
+      {{ end }}
+      {{ if $progress }}
+      <h2 class="mb-0 ms-2">{{- $title -}}</h2>
+      {{ else }}
+      <h3 class="mb-0 ms-2">{{- $title -}}</h3>
+      {{ end }}
+    </div>
+    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse"
+      onclick="toggleCollapseIcon('{{ $id }}')" data-bs-target="#{{ $id }}-body" aria-expanded="true"
+      aria-controls="{{ $id }}-body">
+      <i class="bi bi-caret-down-fill" id="{{ $id }}-card-toggle-icon"></i>
+    </button>
+  </div>

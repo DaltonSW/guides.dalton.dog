@@ -1,0 +1,15 @@
+{{/* extract-title: Parses an H2 header from shortcode .Inner content.
+     Input: raw .Inner string
+     Returns: dict with "title", "id", "body" keys */}}
+{{ $inner := . }}
+{{ $matches := findRE "(?m)^##\\s+.*" $inner }}
+{{ $title := "" }}
+{{ $id := "" }}
+{{ $body := $inner }}
+{{ if gt (len $matches) 0 }}
+  {{ $title = index $matches 0 }}
+  {{ $title = replaceRE "^## " "" $title }}
+  {{ $body = replaceRE "(?m)^##\\s+.*\\n?" "" $inner }}
+  {{ $id = urlize $title }}
+{{ end }}
+{{ return (dict "title" $title "id" $id "body" $body) }}
